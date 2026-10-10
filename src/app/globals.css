@@ -107,8 +107,8 @@ body {
 /* Word reveal animation for Hero title */
 @keyframes wordReveal {
   from {
-    opacity: 0;
-    transform: translateY(24px);
+    opacity: 0.6;
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -117,7 +117,7 @@ body {
 }
 
 .word-reveal {
-  animation: wordReveal 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: wordReveal 300ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* Edge-faded Tech Marquee */

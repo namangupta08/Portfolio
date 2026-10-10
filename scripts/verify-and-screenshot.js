@@ -8,7 +8,7 @@ if (!fs.existsSync(SCREENSHOTS_DIR)) {
 }
 
 const CHROME_PATH = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "http://localhost:3001";
 
 async function run() {
   console.log("Launching Chrome via Playwright...");
@@ -64,17 +64,20 @@ async function run() {
 
       // If mobile, test and screenshot mobile menu open
       if (vp.width === 390 && theme === "dark") {
+        await page.evaluate(() => window.scrollTo(0, 0));
+        await page.waitForTimeout(200);
         const menuBtn = await page.$('button[aria-label="Open navigation menu"]');
         if (menuBtn) {
-          await menuBtn.click();
-          await page.waitForTimeout(200);
+          await menuBtn.click({ force: true });
+          await page.waitForTimeout(300);
           await page.screenshot({
             path: path.join(SCREENSHOTS_DIR, `mobile-menu-open.png`),
           });
           console.log("Saved mobile menu screenshot");
           // Close menu
           const closeBtn = await page.$('button[aria-label="Close navigation menu"]');
-          if (closeBtn) await closeBtn.click();
+          if (closeBtn) await closeBtn.click({ force: true });
+          await page.waitForTimeout(200);
         }
       }
 

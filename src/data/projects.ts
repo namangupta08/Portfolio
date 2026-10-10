@@ -40,7 +40,6 @@ export const featuredProjects: Project[] = [
       "PostgreSQL",
       "Docker",
     ],
-    metricBadge: "0 of 324 jobs lost",
     isFeatured: true,
     bentoSpan: "full",
     screenshot: "/projects/docflow.png",
@@ -91,7 +90,6 @@ export const featuredProjects: Project[] = [
     summary:
       "AI trip planner with a 6-step wizard, validated output, model failover and per-day regeneration.",
     stack: ["React.js", "Tailwind CSS", "Firebase", "Gemini API"],
-    metricBadge: "Model failover & Zod validation",
     isFeatured: true,
     bentoSpan: "half",
     screenshot: "/projects/vistavoyage.png",
