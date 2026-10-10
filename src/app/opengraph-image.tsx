@@ -1,9 +1,9 @@
 import { ImageResponse } from "next/og";
-import { personalData } from "@/data/portfolio";
+import { siteConfig } from "@/data/site";
 
 export const runtime = "nodejs";
 
-export const alt = `${personalData.name} — ${personalData.headline}`;
+export const alt = `${siteConfig.name} — ${siteConfig.title}`;
 export const size = {
   width: 1200,
   height: 630,
@@ -20,8 +20,8 @@ export default async function Image() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#111112",
-          color: "#f4f4f5",
+          backgroundColor: "#0A0A0B",
+          color: "#EDEDED",
           padding: "80px",
           fontFamily: "sans-serif",
         }}
@@ -29,32 +29,34 @@ export default async function Image() {
         <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
           <div
             style={{
-              fontSize: "20px",
+              fontSize: "18px",
               fontFamily: "monospace",
-              color: "#d97753",
+              color: "#D06A4C",
               letterSpacing: "2px",
               textTransform: "uppercase",
             }}
           >
-            {personalData.status}
+            {siteConfig.status}
           </div>
           <div
             style={{
               fontSize: "64px",
-              fontWeight: "bold",
-              letterSpacing: "-0.03em",
-              color: "#ffffff",
+              fontWeight: "600",
+              letterSpacing: "-0.04em",
+              color: "#EDEDED",
             }}
           >
-            {personalData.name}
+            {siteConfig.name}
           </div>
           <div
             style={{
-              fontSize: "32px",
-              color: "#a1a1aa",
+              fontSize: "26px",
+              color: "#A1A1AA",
+              maxWidth: "850px",
+              lineHeight: 1.4,
             }}
           >
-            {personalData.headline}
+            {siteConfig.description}
           </div>
         </div>
 
@@ -63,14 +65,14 @@ export default async function Image() {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            borderTop: "1px solid #27272a",
+            borderTop: "1px solid rgba(255, 255, 255, 0.08)",
             paddingTop: "32px",
-            fontSize: "22px",
-            color: "#71717a",
+            fontSize: "20px",
+            color: "#71717A",
             fontFamily: "monospace",
           }}
         >
-          <div>{personalData.location}</div>
+          <div>{siteConfig.location} · {siteConfig.degree}</div>
           <div>namangupta.dev</div>
         </div>
       </div>

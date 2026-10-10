@@ -1,17 +1,19 @@
 import { MetadataRoute } from "next";
-import { projects } from "@/data/portfolio";
+import { allProjects } from "@/data/projects";
 import { getAllPosts } from "@/lib/blog";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://namangupta.dev";
-  const posts = await getAllPosts(false); // Only published posts
+  const posts = await getAllPosts(false); // Only published posts in public sitemap
 
-  const projectRoutes = projects.map((p) => ({
-    url: `${baseUrl}/projects/${p.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: 0.8,
-  }));
+  const projectRoutes = allProjects
+    .filter((p) => p.detail)
+    .map((p) => ({
+      url: `${baseUrl}/projects/${p.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    }));
 
   const blogRoutes = posts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,

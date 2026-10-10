@@ -34,8 +34,8 @@ export default async function Image({ params }: Props) {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#111112",
-          color: "#f4f4f5",
+          backgroundColor: "#0A0A0B",
+          color: "#EDEDED",
           padding: "80px",
           fontFamily: "sans-serif",
         }}
@@ -45,19 +45,19 @@ export default async function Image({ params }: Props) {
             style={{
               fontSize: "18px",
               fontFamily: "monospace",
-              color: "#d97753",
+              color: "#D06A4C",
               textTransform: "uppercase",
               letterSpacing: "2px",
             }}
           >
-            Naman Gupta • Blog
+            Naman Gupta · Blog
           </div>
           <div
             style={{
-              fontSize: "52px",
-              fontWeight: "bold",
-              letterSpacing: "-0.02em",
-              color: "#ffffff",
+              fontSize: "50px",
+              fontWeight: "600",
+              letterSpacing: "-0.03em",
+              color: "#EDEDED",
               lineHeight: 1.2,
             }}
           >
@@ -65,10 +65,11 @@ export default async function Image({ params }: Props) {
           </div>
           <div
             style={{
-              fontSize: "24px",
-              color: "#a1a1aa",
+              fontSize: "22px",
+              color: "#A1A1AA",
               lineHeight: 1.4,
               marginTop: "8px",
+              maxWidth: "900px",
             }}
           >
             {description}
@@ -80,10 +81,10 @@ export default async function Image({ params }: Props) {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            borderTop: "1px solid #27272a",
+            borderTop: "1px solid rgba(255, 255, 255, 0.08)",
             paddingTop: "32px",
             fontSize: "20px",
-            color: "#71717a",
+            color: "#71717A",
             fontFamily: "monospace",
           }}
         >
