@@ -52,6 +52,8 @@ export async function getAllPosts(includeDrafts: boolean = false): Promise<PostM
 
   const files = fs.readdirSync(BLOG_DIR);
   const posts: PostMeta[] = [];
+  const shouldIncludeDrafts =
+    process.env.SHOW_DRAFTS === "true" || includeDrafts;
 
   for (const file of files) {
     if (!file.endsWith(".md") && !file.endsWith(".mdx")) continue;
@@ -62,7 +64,7 @@ export async function getAllPosts(includeDrafts: boolean = false): Promise<PostM
     const { data, content } = matter(fileContents);
 
     const isDraft = Boolean(data.draft);
-    if (isDraft && !includeDrafts) {
+    if (isDraft && !shouldIncludeDrafts) {
       continue;
     }
 
@@ -103,7 +105,10 @@ export async function getPostBySlug(
   const { data, content } = matter(fileContents);
 
   const isDraft = Boolean(data.draft);
-  if (isDraft && !includeDrafts) {
+  const shouldIncludeDrafts =
+    process.env.SHOW_DRAFTS === "true" || includeDrafts;
+
+  if (isDraft && !shouldIncludeDrafts) {
     return null;
   }
 
@@ -154,7 +159,7 @@ export async function getPostBySlug(
   const htmlContent = marked.parser(tokens, { renderer });
 
   // Get prev and next posts
-  const allPosts = await getAllPosts(includeDrafts);
+  const allPosts = await getAllPosts(shouldIncludeDrafts);
   const currentIndex = allPosts.findIndex((p) => p.slug === slug);
   const prevPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
   const nextPost =
