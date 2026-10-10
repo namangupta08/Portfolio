@@ -24,6 +24,7 @@ export default async function Image({ params }: Props) {
   const post = await getPostBySlug(params.slug, true);
   const title = post ? post.title : "Blog Post";
   const description = post ? post.description : "Naman Gupta Engineering Blog";
+  const dateStr = post?.date || "Engineering";
 
   return new ImageResponse(
     (
@@ -43,6 +44,7 @@ export default async function Image({ params }: Props) {
         <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
           <div
             style={{
+              display: "flex",
               fontSize: "18px",
               fontFamily: "monospace",
               color: "#D06A4C",
@@ -54,6 +56,7 @@ export default async function Image({ params }: Props) {
           </div>
           <div
             style={{
+              display: "flex",
               fontSize: "50px",
               fontWeight: "600",
               letterSpacing: "-0.03em",
@@ -65,6 +68,7 @@ export default async function Image({ params }: Props) {
           </div>
           <div
             style={{
+              display: "flex",
               fontSize: "22px",
               color: "#A1A1AA",
               lineHeight: 1.4,
@@ -88,8 +92,8 @@ export default async function Image({ params }: Props) {
             fontFamily: "monospace",
           }}
         >
-          <div>{post?.date || "Engineering"}</div>
-          <div>namangupta.dev</div>
+          <div style={{ display: "flex" }}>{dateStr}</div>
+          <div style={{ display: "flex" }}>namangupta.dev</div>
         </div>
       </div>
     ),

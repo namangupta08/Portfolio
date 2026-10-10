@@ -11,6 +11,8 @@ export const size = {
 export const contentType = "image/png";
 
 export default async function Image() {
+  const metaLine = `${siteConfig.location} · ${siteConfig.degree}`;
+
   return new ImageResponse(
     (
       <div
@@ -29,6 +31,7 @@ export default async function Image() {
         <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
           <div
             style={{
+              display: "flex",
               fontSize: "18px",
               fontFamily: "monospace",
               color: "#D06A4C",
@@ -40,6 +43,7 @@ export default async function Image() {
           </div>
           <div
             style={{
+              display: "flex",
               fontSize: "64px",
               fontWeight: "600",
               letterSpacing: "-0.04em",
@@ -50,6 +54,7 @@ export default async function Image() {
           </div>
           <div
             style={{
+              display: "flex",
               fontSize: "26px",
               color: "#A1A1AA",
               maxWidth: "850px",
@@ -72,8 +77,8 @@ export default async function Image() {
             fontFamily: "monospace",
           }}
         >
-          <div>{siteConfig.location} · {siteConfig.degree}</div>
-          <div>namangupta.dev</div>
+          <div style={{ display: "flex" }}>{metaLine}</div>
+          <div style={{ display: "flex" }}>namangupta.dev</div>
         </div>
       </div>
     ),
