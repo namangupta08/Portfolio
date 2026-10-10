@@ -17,7 +17,7 @@ export default function ResumePage() {
   const fileExists = fs.existsSync(resumePdfPath);
 
   return (
-    <div className="py-10 sm:py-14 space-y-8 pb-36 sm:pb-40">
+    <div className="py-10 sm:py-14 space-y-6 pb-16">
       {/* Top Header */}
       <div className="space-y-4">
         <Link
@@ -64,16 +64,32 @@ export default function ResumePage() {
         </div>
       </div>
 
-      {/* 100% Full View Resume Container */}
+      {/* Embedded Real PDF Viewer with Clickable Links and Zoomed-Out Fit */}
       {fileExists ? (
-        <div className="w-full rounded-[16px] border border-border bg-surface p-2 sm:p-4 shadow-xl">
-          <div className="relative w-full rounded-[10px] overflow-hidden bg-white shadow-sm border border-black/10">
-            {/* 100% Full High-Resolution Resume Page */}
-            <img
-              src="/Naman-Gupta-Resume.png"
-              alt="Naman Gupta Resume"
-              className="w-full h-auto object-contain block select-none"
-            />
+        <div className="w-full rounded-[14px] border border-border bg-surface p-2 sm:p-3 shadow-lg">
+          <div className="w-full h-[950px] sm:h-[1100px] md:h-[1200px] rounded-[10px] overflow-hidden bg-white">
+            <object
+              data="/Naman-Gupta-Resume.pdf#zoom=85&view=FitH&toolbar=0"
+              type="application/pdf"
+              className="w-full h-full rounded-[10px] border-0"
+            >
+              <iframe
+                src="/Naman-Gupta-Resume.pdf#zoom=85&view=FitH&toolbar=0"
+                className="w-full h-full rounded-[10px] border-0"
+                title="Naman Gupta Resume"
+              >
+                <div className="p-8 text-center text-sm text-muted space-y-3">
+                  <p>Your browser does not support inline PDF viewing.</p>
+                  <a
+                    href="/Naman-Gupta-Resume.pdf"
+                    download="Naman-Gupta-Resume.pdf"
+                    className="inline-flex items-center gap-1.5 text-accent underline"
+                  >
+                    Download Naman-Gupta-Resume.pdf directly
+                  </a>
+                </div>
+              </iframe>
+            </object>
           </div>
         </div>
       ) : (

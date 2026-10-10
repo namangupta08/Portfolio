@@ -3,7 +3,6 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import BottomNav from "./components/BottomNav";
 import SpotlightBackground from "./components/SpotlightBackground";
 import { siteConfig } from "@/data/site";
 import { Analytics } from "@vercel/analytics/react";
@@ -88,7 +87,6 @@ export default function RootLayout({
         </main>
 
         <Footer />
-        <BottomNav />
         {process.env.VERCEL ? <Analytics /> : null}
       </body>
     </html>

@@ -20,6 +20,6 @@ export const siteConfig = {
   ],
   resume: {
     path: "/Naman-Gupta-Resume.pdf",
-    lastUpdated: "July 2025",
+    lastUpdated: "October 2026",
   },
 };
