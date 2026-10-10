@@ -32,10 +32,8 @@ export const featuredProjects: Project[] = [
       "Personal finance tracker with budget alerts, categorized spend tracking, and an analytical month-end report computed in SQL.",
     stack: ["React", "TypeScript", "Node.js", "Express", "PostgreSQL"],
     isFeatured: true,
-    bentoSpan: "half",
     screenshot: "/projects/spendwise.png",
     liveUrl: "https://spendwise-fintech.vercel.app/",
-    isPrivateSource: true,
     detail: {
       problem:
         "Aggregating large volumes of transaction records for reporting causes query slowdowns, while personal finance users require immediate threshold notifications.",
@@ -57,7 +55,6 @@ export const featuredProjects: Project[] = [
       "AI travel planner producing structured 9-section editorial dossiers with landmarks, timing logistics, interactive maps, transit directions, and exportable PDF schedules.",
     stack: ["React", "Vite", "Tailwind CSS", "Gemini API", "Firebase"],
     isFeatured: true,
-    bentoSpan: "half",
     screenshot: "/projects/vistavoyage.png",
     liveUrl: "https://vistavoyage-ai-trip-planner.vercel.app/",
     githubUrl: "https://github.com/namangupta08/Ai-Trip-Planner",
@@ -82,8 +79,8 @@ export const featuredProjects: Project[] = [
       "Short-form EdTech platform featuring bite-sized micro-lessons, interactive topic progression, and adaptive student content delivery.",
     stack: ["React.js", "JWT", "Node.js", "Express.js"],
     isFeatured: true,
-    bentoSpan: "half",
     screenshot: "/projects/zevise.png",
+    liveUrl: "https://www.zevise.com/",
     detail: {
       problem:
         "Traditional online course portals suffer from student fatigue and poor mobile completion rates.",
@@ -112,8 +109,9 @@ export const featuredProjects: Project[] = [
       "Docker",
     ],
     isFeatured: true,
-    bentoSpan: "half",
     screenshot: "/projects/docflow.png",
+    liveUrl: "https://github.com/namangupta08/docflow",
+    githubUrl: "https://github.com/namangupta08/docflow",
     detail: {
       problem:
         "Processing CPU-bound PDF workloads synchronously caused job loss during worker restarts and queue congestion.",
@@ -127,9 +125,6 @@ export const featuredProjects: Project[] = [
         "Isolate worker processes on dedicated compute instances to avoid CPU contention during PDF parsing.",
     },
   },
-];
-
-export const moreProjects: Project[] = [
   {
     slug: "swiftcabs",
     name: "Swift Cab",
@@ -145,8 +140,10 @@ export const moreProjects: Project[] = [
       "Leaflet.js",
       "JWT",
     ],
+    isFeatured: true,
     screenshot: "/projects/swiftcab.png",
-    isFeatured: false,
+    liveUrl: "https://swift-cab.vercel.app/",
+    githubUrl: "https://github.com/namangupta08/Swift-Cab",
   },
   {
     slug: "studynotion",
@@ -162,8 +159,10 @@ export const moreProjects: Project[] = [
       "MongoDB",
       "Razorpay",
     ],
+    isFeatured: true,
     screenshot: "/projects/studynotion.png",
-    isFeatured: false,
+    liveUrl: "https://study-notion-edtech-tau.vercel.app/",
+    githubUrl: "https://github.com/namangupta08/StudyNotion",
   },
   {
     slug: "chatx",
@@ -180,9 +179,13 @@ export const moreProjects: Project[] = [
       "MongoDB",
       "JWT",
     ],
+    isFeatured: true,
     screenshot: "/projects/chatx.png",
-    isFeatured: false,
+    liveUrl: "https://chatx-chat-app.vercel.app/",
+    githubUrl: "https://github.com/namangupta08/Chat-App",
   },
 ];
 
-export const allProjects: Project[] = [...featuredProjects, ...moreProjects];
+export const moreProjects: Project[] = [];
+
+export const allProjects: Project[] = featuredProjects;
