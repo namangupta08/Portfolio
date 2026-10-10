@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 :root {
-  /* ONE accent: muted warm terracotta */
-  --accent: #C85A32;
-  --accent-rgb: 200, 90, 50;
+  /* ONE accent: muted warm terracotta with WCAG AA compliance (4.7:1 against light background and white) */
+  --accent: #B84D28;
+  --accent-rgb: 184, 77, 40;
 
   /* Light theme: off-white structure */
   --background: #FBFBFC;
@@ -14,14 +14,14 @@
   --border: rgba(0, 0, 0, 0.08);
   --border-strong: rgba(0, 0, 0, 0.16);
   --foreground: #18181B;
-  --muted: #71717A;
-  --muted-dark: #A1A1AA;
+  --muted: #4B4B53;
+  --muted-dark: #63636E;
 }
 
 .dark {
-  /* Hero look: near-black */
-  --accent: #D06A4C;
-  --accent-rgb: 208, 106, 76;
+  /* Hero look: near-black, warm terracotta accent */
+  --accent: #E06C46;
+  --accent-rgb: 224, 108, 70;
 
   --background: #0A0A0B;
   --surface: #111113;
@@ -29,8 +29,8 @@
   --border: rgba(255, 255, 255, 0.08);
   --border-strong: rgba(255, 255, 255, 0.18);
   --foreground: #EDEDED;
-  --muted: #A1A1AA;
-  --muted-dark: #71717A;
+  --muted: #B8B8C2;
+  --muted-dark: #A4A4B0;
 }
 
 html {
@@ -102,6 +102,22 @@ body {
 
 .btn-press:active {
   transform: translateY(1px);
+}
+
+/* Word reveal animation for Hero title */
+@keyframes wordReveal {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.word-reveal {
+  animation: wordReveal 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* Cursor following spotlight in accent at ~6% opacity */

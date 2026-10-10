@@ -114,7 +114,7 @@ export default function TechStack() {
                     key={item.name}
                     className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-[8px] border border-border bg-surface text-muted hover:text-foreground hover:border-foreground/30 transition-all card-hover cursor-default"
                   >
-                    <span className="text-muted-dark group-hover:text-accent transition-colors">
+                    <span className="text-muted-dark group-hover:text-accent transition-colors" aria-hidden="true">
                       {getTechIcon(item.iconName)}
                     </span>
                     <span className="font-mono text-xs font-medium text-foreground">

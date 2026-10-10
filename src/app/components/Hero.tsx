@@ -16,7 +16,7 @@ import { socialLinks } from "@/data/links";
 
 function CountUpNumber({
   target,
-  duration = 1.2,
+  duration = 1.0,
   suffix = "",
   prefix = "",
 }: {
@@ -25,18 +25,33 @@ function CountUpNumber({
   suffix?: string;
   prefix?: string;
 }) {
-  const [current, setCurrent] = useState(0);
-  const [hasStarted, setHasStarted] = useState(false);
+  const [current, setCurrent] = useState(target);
+  const [hasAnimated, setHasAnimated] = useState(false);
   const elementRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const el = elementRef.current;
-    if (!el) return;
+    if (!el || hasAnimated) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && !hasStarted) {
-          setHasStarted(true);
+        if (entries[0].isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+          setCurrent(0);
+          const startTime = performance.now();
+          const step = (now: number) => {
+            const elapsed = (now - startTime) / 1000;
+            const progress = Math.min(1, elapsed / duration);
+            const easeProgress = 1 - Math.pow(1 - progress, 3);
+            setCurrent(Math.floor(easeProgress * target));
+
+            if (progress < 1) {
+              requestAnimationFrame(step);
+            } else {
+              setCurrent(target);
+            }
+          };
+          requestAnimationFrame(step);
         }
       },
       { threshold: 0.2 }
@@ -44,32 +59,7 @@ function CountUpNumber({
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [hasStarted]);
-
-  useEffect(() => {
-    if (!hasStarted) return;
-    if (target === 0) {
-      setCurrent(0);
-      return;
-    }
-
-    const startTime = performance.now();
-    const step = (now: number) => {
-      const elapsed = (now - startTime) / 1000;
-      const progress = Math.min(1, elapsed / duration);
-      // Ease out cubic
-      const easeProgress = 1 - Math.pow(1 - progress, 3);
-      setCurrent(Math.floor(easeProgress * target));
-
-      if (progress < 1) {
-        requestAnimationFrame(step);
-      } else {
-        setCurrent(target);
-      }
-    };
-
-    requestAnimationFrame(step);
-  }, [hasStarted, target, duration]);
+  }, [hasAnimated, target, duration]);
 
   return (
     <span ref={elementRef}>
@@ -157,31 +147,25 @@ export default function Hero() {
           <span className="text-foreground font-medium">{siteConfig.status}</span>
         </div>
 
-        {/* Hero Name: Word by word reveal */}
+        {/* Hero Name: Word by word reveal using CSS animation for instant SSR LCP */}
         <h1
           className="font-semibold text-foreground tracking-[-0.04em] leading-[0.95]"
           style={{ fontSize: "clamp(3rem, 10vw, 8rem)" }}
         >
           {nameWords.map((word, idx) => (
-            <motion.span
+            <span
               key={idx}
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.6,
-                ease: [0.16, 1, 0.3, 1],
-                delay: idx * 0.06,
-              }}
-              className="inline-block mr-[0.25em] last:mr-0"
+              className="inline-block mr-[0.25em] last:mr-0 word-reveal"
+              style={{ animationDelay: `${idx * 60}ms` }}
             >
               {word}
-            </motion.span>
+            </span>
           ))}
         </h1>
 
         {/* Rotating phrase: vertical text swap every 2.5s */}
         <div className="flex items-center text-xl sm:text-2xl text-muted font-normal h-10 overflow-hidden">
-          <span className="mr-2 text-foreground/80">I build</span>
+          <span className="mr-2 text-foreground">I build</span>
           <div className="relative inline-flex h-10 items-center overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.span
@@ -202,21 +186,21 @@ export default function Hero() {
         {/* Meta row with icons */}
         <div className="flex flex-wrap items-center gap-y-2 gap-x-5 text-xs font-mono text-muted pt-1">
           <div className="inline-flex items-center gap-1.5">
-            <MapPin className="w-3.5 h-3.5 text-muted-dark" />
+            <MapPin className="w-3.5 h-3.5 text-muted-dark" aria-hidden="true" />
             <span>{siteConfig.location}</span>
           </div>
 
           <span className="text-border" aria-hidden="true">·</span>
 
           <div className="inline-flex items-center gap-1.5">
-            <Clock className="w-3.5 h-3.5 text-muted-dark" />
+            <Clock className="w-3.5 h-3.5 text-muted-dark" aria-hidden="true" />
             <span>{istTime || "IST"}</span>
           </div>
 
           <span className="text-border" aria-hidden="true">·</span>
 
           <div className="inline-flex items-center gap-1.5">
-            <GraduationCap className="w-3.5 h-3.5 text-muted-dark" />
+            <GraduationCap className="w-3.5 h-3.5 text-muted-dark" aria-hidden="true" />
             <span>{siteConfig.degree}</span>
           </div>
         </div>
@@ -226,10 +210,10 @@ export default function Hero() {
           {/* Primary CTA (accent) */}
           <a
             href="#projects"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-[10px] bg-accent text-white text-sm font-medium hover:brightness-105 btn-press shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-[10px] bg-accent text-white dark:text-[#0A0A0B] text-sm font-semibold hover:brightness-105 btn-press shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
             <span>View my work</span>
-            <ArrowDown className="w-4 h-4" />
+            <ArrowDown className="w-4 h-4" aria-hidden="true" />
           </a>
 
           {/* Secondary CTA */}
@@ -237,7 +221,7 @@ export default function Hero() {
             href="/resume"
             className="inline-flex items-center gap-2 px-4 py-2.5 rounded-[10px] border border-border bg-surface text-sm font-medium text-foreground hover:border-foreground/30 btn-press focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
-            <FileText className="w-4 h-4 text-muted" />
+            <FileText className="w-4 h-4 text-muted" aria-hidden="true" />
             <span>Resume</span>
           </Link>
 
@@ -250,7 +234,7 @@ export default function Hero() {
               aria-label="GitHub Profile"
               className="p-2.5 rounded-[10px] border border-border bg-surface text-muted hover:text-foreground hover:border-foreground/30 btn-press focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
-              <SiGithub className="w-4 h-4" />
+              <SiGithub className="w-4 h-4" aria-hidden="true" />
             </a>
 
             <a
@@ -260,7 +244,7 @@ export default function Hero() {
               aria-label="LinkedIn Profile"
               className="p-2.5 rounded-[10px] border border-border bg-surface text-muted hover:text-foreground hover:border-foreground/30 btn-press focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
-              <SiLinkedin className="w-4 h-4" />
+              <SiLinkedin className="w-4 h-4" aria-hidden="true" />
             </a>
 
             <a
@@ -270,7 +254,7 @@ export default function Hero() {
               aria-label="LeetCode Profile"
               className="p-2.5 rounded-[10px] border border-border bg-surface text-muted hover:text-foreground hover:border-foreground/30 btn-press focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
-              <SiLeetcode className="w-4 h-4" />
+              <SiLeetcode className="w-4 h-4" aria-hidden="true" />
             </a>
           </div>
         </div>

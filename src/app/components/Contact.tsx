@@ -39,9 +39,9 @@ export default function Contact() {
         <div className="flex flex-wrap items-center gap-3 pt-2">
           <a
             href={socialLinks.emailMailto}
-            className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-[10px] bg-accent text-white text-base font-medium hover:brightness-105 btn-press shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-[10px] bg-accent text-white dark:text-[#0A0A0B] text-base font-semibold hover:brightness-105 btn-press shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
-            <Mail className="w-4 h-4" />
+            <Mail className="w-4 h-4" aria-hidden="true" />
             <span>{socialLinks.email}</span>
           </a>
 
@@ -53,12 +53,12 @@ export default function Contact() {
           >
             {copied ? (
               <>
-                <Check className="w-4 h-4 text-accent" />
+                <Check className="w-4 h-4 text-accent" aria-hidden="true" />
                 <span className="text-accent font-medium">Copied</span>
               </>
             ) : (
               <>
-                <Copy className="w-4 h-4 text-muted" />
+                <Copy className="w-4 h-4 text-muted" aria-hidden="true" />
                 <span>Copy</span>
               </>
             )}
@@ -73,33 +73,36 @@ export default function Contact() {
               href={socialLinks.github}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="GitHub Profile"
               className="inline-flex items-center gap-2 px-3.5 py-2 rounded-md border border-border bg-surface-subtle text-xs font-mono text-muted hover:text-foreground hover:border-foreground/30 btn-press"
             >
-              <SiGithub className="w-3.5 h-3.5" />
+              <SiGithub className="w-3.5 h-3.5" aria-hidden="true" />
               <span>GitHub</span>
-              <ArrowUpRight className="w-3 h-3 text-muted-dark" />
+              <ArrowUpRight className="w-3 h-3 text-muted-dark" aria-hidden="true" />
             </a>
 
             <a
               href={socialLinks.linkedin}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="LinkedIn Profile"
               className="inline-flex items-center gap-2 px-3.5 py-2 rounded-md border border-border bg-surface-subtle text-xs font-mono text-muted hover:text-foreground hover:border-foreground/30 btn-press"
             >
-              <SiLinkedin className="w-3.5 h-3.5" />
+              <SiLinkedin className="w-3.5 h-3.5" aria-hidden="true" />
               <span>LinkedIn</span>
-              <ArrowUpRight className="w-3 h-3 text-muted-dark" />
+              <ArrowUpRight className="w-3 h-3 text-muted-dark" aria-hidden="true" />
             </a>
 
             <a
               href={socialLinks.leetcode}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="LeetCode Profile"
               className="inline-flex items-center gap-2 px-3.5 py-2 rounded-md border border-border bg-surface-subtle text-xs font-mono text-muted hover:text-foreground hover:border-foreground/30 btn-press"
             >
-              <SiLeetcode className="w-3.5 h-3.5" />
+              <SiLeetcode className="w-3.5 h-3.5" aria-hidden="true" />
               <span>LeetCode</span>
-              <ArrowUpRight className="w-3 h-3 text-muted-dark" />
+              <ArrowUpRight className="w-3 h-3 text-muted-dark" aria-hidden="true" />
             </a>
           </div>
 
@@ -109,7 +112,7 @@ export default function Contact() {
             download="Naman-Gupta-Resume.pdf"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-border bg-surface text-xs font-mono text-foreground hover:border-foreground/30 btn-press"
           >
-            <Download className="w-3.5 h-3.5 text-muted" />
+            <Download className="w-3.5 h-3.5 text-muted" aria-hidden="true" />
             <span>Download resume</span>
           </a>
         </div>

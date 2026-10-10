@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
 import {
   Trophy,
   Gauge,
@@ -11,8 +10,8 @@ import {
   PenLine,
 } from "lucide-react";
 
-export default function About() {
-  const [photoError, setPhotoError] = useState(false);
+export default function About({ hasPhoto = false }: { hasPhoto?: boolean }) {
+  const [photoError, setPhotoError] = useState(!hasPhoto);
   const [f1LightsActive, setF1LightsActive] = useState(false);
   const [optimisingHover, setOptimisingHover] = useState(false);
 
@@ -50,12 +49,11 @@ export default function About() {
               <div className="w-64 h-80 sm:w-72 sm:h-88 rounded-[14px] border border-border bg-surface overflow-hidden shadow-sm -rotate-2 group-hover:rotate-0 transition-transform duration-300 ease-out flex items-center justify-center p-2">
                 {!photoError ? (
                   <div className="relative w-full h-full rounded-[10px] overflow-hidden bg-surface-subtle">
-                    <Image
+                    {/* Native img with graceful onError fallback to monogram */}
+                    <img
                       src="/about/me.jpg"
                       alt="Naman Gupta"
-                      fill
-                      sizes="(max-width: 768px) 256px, 288px"
-                      className="object-cover"
+                      className="w-full h-full object-cover"
                       onError={() => setPhotoError(true)}
                     />
                   </div>
@@ -86,7 +84,7 @@ export default function About() {
             <div className="p-5 rounded-[14px] border border-border bg-surface card-hover group">
               <div className="flex items-center gap-3">
                 <div className="p-2 rounded-md bg-surface-subtle text-foreground border border-border/50 group-hover:-translate-y-1 transition-transform">
-                  <Trophy className="w-4 h-4 text-accent" />
+                  <Trophy className="w-4 h-4 text-accent" aria-hidden="true" />
                 </div>
                 <h3 className="font-semibold text-sm text-foreground">Sports</h3>
               </div>
@@ -104,7 +102,7 @@ export default function About() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="p-2 rounded-md bg-surface-subtle text-foreground border border-border/50">
-                    <Gauge className="w-4 h-4" />
+                    <Gauge className="w-4 h-4" aria-hidden="true" />
                   </div>
                   <h3 className="font-semibold text-sm text-foreground">Formula 1</h3>
                 </div>
@@ -135,13 +133,13 @@ export default function About() {
             <div className="p-5 rounded-[14px] border border-border bg-surface card-hover group">
               <div className="flex items-center gap-3">
                 <div className="p-2 rounded-md bg-surface-subtle text-foreground border border-border/50">
-                  <Code2 className="w-4 h-4" />
+                  <Code2 className="w-4 h-4" aria-hidden="true" />
                 </div>
                 <h3 className="font-semibold text-sm text-foreground">Coding</h3>
               </div>
               <div className="mt-3 text-xs font-mono text-muted flex items-center gap-1">
                 <span>DSA drills & LeetCode problem solving</span>
-                <span className="w-1.5 h-3.5 bg-accent inline-block animate-pulse" />
+                <span className="w-1.5 h-3.5 bg-accent inline-block animate-pulse" aria-hidden="true" />
               </div>
             </div>
 
@@ -154,11 +152,11 @@ export default function About() {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="p-2 rounded-md bg-surface-subtle text-foreground border border-border/50">
-                    <Zap className="w-4 h-4 text-accent" />
+                    <Zap className="w-4 h-4 text-accent" aria-hidden="true" />
                   </div>
                   <h3 className="font-semibold text-sm text-foreground">Optimising</h3>
                 </div>
-                <span className="text-[11px] font-mono text-accent font-medium">
+                <span className="text-[11px] font-mono text-accent font-semibold">
                   {optimisingHover ? "79 ms" : "138 ms"}
                 </span>
               </div>
@@ -173,7 +171,7 @@ export default function About() {
             <div className="p-5 rounded-[14px] border border-border bg-surface card-hover group">
               <div className="flex items-center gap-3">
                 <div className="p-2 rounded-md bg-surface-subtle text-foreground border border-border/50 group-hover:rotate-12 transition-transform">
-                  <Hammer className="w-4 h-4" />
+                  <Hammer className="w-4 h-4" aria-hidden="true" />
                 </div>
                 <h3 className="font-semibold text-sm text-foreground">
                   Building from scratch
@@ -188,7 +186,7 @@ export default function About() {
             <div className="p-5 rounded-[14px] border border-border bg-surface card-hover group">
               <div className="flex items-center gap-3">
                 <div className="p-2 rounded-md bg-surface-subtle text-foreground border border-border/50 group-hover:-translate-y-0.5 transition-transform">
-                  <PenLine className="w-4 h-4" />
+                  <PenLine className="w-4 h-4" aria-hidden="true" />
                 </div>
                 <h3 className="font-semibold text-sm text-foreground">
                   Learning in public

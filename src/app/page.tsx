@@ -10,6 +10,9 @@ import Contact from "./components/Contact";
 import { getGitHubContributions } from "@/lib/github";
 import { getAllPosts } from "@/lib/blog";
 
+import fs from "fs";
+import path from "path";
+
 export const revalidate = 43200; // 12 hours cache for GitHub contributions & static pages
 
 export default async function HomePage() {
@@ -17,6 +20,13 @@ export default async function HomePage() {
     getGitHubContributions("namangupta08"),
     getAllPosts(true), // Include posts for review
   ]);
+
+  const publicDir = path.join(process.cwd(), "public");
+  const hasAboutPhoto = fs.existsSync(path.join(publicDir, "about/me.jpg"));
+  const existingLogos = {
+    epigee: fs.existsSync(path.join(publicDir, "logos/epigee.png")),
+    zevise: fs.existsSync(path.join(publicDir, "logos/zevise.png")),
+  };
 
   return (
     <div className="space-y-0">
@@ -27,10 +37,10 @@ export default async function HomePage() {
       <Activity data={gitHubData} />
 
       {/* 3. ABOUT */}
-      <About />
+      <About hasPhoto={hasAboutPhoto} />
 
       {/* 4. EXPERIENCE */}
-      <Experience />
+      <Experience existingLogos={existingLogos} />
 
       {/* 5. PROJECTS (Selected work) */}
       <Projects />

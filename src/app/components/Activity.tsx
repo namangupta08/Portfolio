@@ -83,7 +83,7 @@ export default function Activity({ data }: ActivityProps) {
 
           {data.isStaticSnapshot && (
             <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-border bg-surface text-[11px] font-mono text-muted-dark w-fit">
-              <span className="w-1.5 h-1.5 rounded-full bg-muted-dark" />
+              <span className="w-1.5 h-1.5 rounded-full bg-muted-dark" aria-hidden="true" />
               <span>Static snapshot</span>
             </div>
           )}
@@ -101,7 +101,7 @@ export default function Activity({ data }: ActivityProps) {
           >
             <div className="inline-flex flex-col min-w-max">
               {/* Month Labels */}
-              <div className="flex text-[10px] font-mono text-muted-dark mb-2 ml-8 h-4 relative">
+              <div className="flex text-[10px] font-mono text-muted-dark mb-2 ml-8 h-4 relative" aria-hidden="true">
                 {monthLabels.map((m, idx) => (
                   <span
                     key={idx}
@@ -116,7 +116,7 @@ export default function Activity({ data }: ActivityProps) {
               {/* Day labels + Grid */}
               <div className="flex items-start gap-2">
                 {/* Day Labels (Mon, Wed, Fri) */}
-                <div className="flex flex-col gap-[3px] text-[9px] font-mono text-muted-dark pt-[2px] w-6 select-none">
+                <div className="flex flex-col gap-[3px] text-[9px] font-mono text-muted-dark pt-[2px] w-6 select-none" aria-hidden="true">
                   <span className="h-[11px] leading-[11px]"></span>
                   <span className="h-[11px] leading-[11px]">Mon</span>
                   <span className="h-[11px] leading-[11px]"></span>
@@ -127,11 +127,10 @@ export default function Activity({ data }: ActivityProps) {
                 </div>
 
                 {/* Weeks Grid */}
-                <div role="grid" aria-label="Contributions calendar" className="inline-flex gap-[3px]">
+                <div role="presentation" className="inline-flex gap-[3px]">
                   {data.weeks.map((week, wIdx) => (
                     <div
                       key={wIdx}
-                      role="row"
                       className="flex flex-col gap-[3px]"
                       style={{
                         animation: "fadeUp 400ms ease-out both",
@@ -141,8 +140,6 @@ export default function Activity({ data }: ActivityProps) {
                       {week.days.map((day, dIdx) => (
                         <div
                           key={`${wIdx}-${dIdx}`}
-                          role="gridcell"
-                          tabIndex={0}
                           onMouseEnter={(e) => {
                             const rect = e.currentTarget.getBoundingClientRect();
                             setTooltip({
@@ -152,19 +149,10 @@ export default function Activity({ data }: ActivityProps) {
                             });
                           }}
                           onMouseLeave={() => setTooltip(null)}
-                          onFocus={(e) => {
-                            const rect = e.currentTarget.getBoundingClientRect();
-                            setTooltip({
-                              text: `${day.count} contribution${day.count === 1 ? "" : "s"} on ${formatDate(day.date)}`,
-                              x: rect.left + rect.width / 2,
-                              y: rect.top - 8,
-                            });
-                          }}
-                          onBlur={() => setTooltip(null)}
-                          className={`w-[11px] h-[11px] rounded-[2.5px] transition-colors cursor-pointer hover:ring-1 hover:ring-accent focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent ${getLevelClass(
+                          className={`w-[11px] h-[11px] rounded-[2.5px] transition-colors cursor-pointer hover:ring-1 hover:ring-accent ${getLevelClass(
                             day.level
                           )}`}
-                          aria-label={`${day.count} contributions on ${formatDate(day.date)}`}
+                          title={`${day.count} contribution${day.count === 1 ? "" : "s"} on ${formatDate(day.date)}`}
                         />
                       ))}
                     </div>

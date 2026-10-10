@@ -10,12 +10,14 @@ function RoleCard({
   role,
   isExpanded,
   onToggle,
+  hasLogo = false,
 }: {
   role: ExperienceRole;
   isExpanded: boolean;
   onToggle: () => void;
+  hasLogo?: boolean;
 }) {
-  const [logoError, setLogoError] = useState(false);
+  const [logoError, setLogoError] = useState(!hasLogo);
   const companyInitials = role.company
     .split(" ")
     .map((w) => w[0])
@@ -160,7 +162,11 @@ function RoleCard({
   );
 }
 
-export default function Experience() {
+export default function Experience({
+  existingLogos = {},
+}: {
+  existingLogos?: Record<string, boolean>;
+}) {
   // Collapsed by default except the newest (Epigee expanded by default)
   const [expandedIds, setExpandedIds] = useState<Record<string, boolean>>({
     epigee: true,
@@ -216,6 +222,7 @@ export default function Experience() {
             <RoleCard
               key={role.id}
               role={role}
+              hasLogo={Boolean(existingLogos[role.id])}
               isExpanded={Boolean(expandedIds[role.id])}
               onToggle={() => toggleRole(role.id)}
             />

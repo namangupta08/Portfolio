@@ -84,7 +84,7 @@ export default function RootLayout({
         </main>
 
         <Footer />
-        <Analytics />
+        {process.env.VERCEL ? <Analytics /> : null}
       </body>
     </html>
   );

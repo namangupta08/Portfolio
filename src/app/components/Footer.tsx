@@ -33,7 +33,7 @@ export default function Footer() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors group"
           >
-            <Github className="w-3.5 h-3.5" />
+            <Github className="w-3.5 h-3.5" aria-hidden="true" />
             <span>GitHub</span>
           </a>
 
@@ -43,7 +43,7 @@ export default function Footer() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors group"
           >
-            <Linkedin className="w-3.5 h-3.5" />
+            <Linkedin className="w-3.5 h-3.5" aria-hidden="true" />
             <span>LinkedIn</span>
           </a>
 
@@ -53,7 +53,7 @@ export default function Footer() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors group"
           >
-            <Terminal className="w-3.5 h-3.5" />
+            <Terminal className="w-3.5 h-3.5" aria-hidden="true" />
             <span>LeetCode</span>
           </a>
 
@@ -61,7 +61,7 @@ export default function Footer() {
             href={socialLinks.emailMailto}
             className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors group"
           >
-            <Mail className="w-3.5 h-3.5" />
+            <Mail className="w-3.5 h-3.5" aria-hidden="true" />
             <span>Email</span>
           </a>
 
@@ -73,12 +73,12 @@ export default function Footer() {
           >
             {copied ? (
               <>
-                <Check className="w-3 h-3 text-accent" />
+                <Check className="w-3 h-3 text-accent" aria-hidden="true" />
                 <span className="text-accent font-medium">Copied</span>
               </>
             ) : (
               <>
-                <Copy className="w-3 h-3 text-muted" />
+                <Copy className="w-3 h-3 text-muted" aria-hidden="true" />
                 <span>Copy email</span>
               </>
             )}
@@ -93,7 +93,7 @@ export default function Footer() {
             className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded p-0.5"
           >
             <span>Back to top</span>
-            <ArrowUp className="w-3.5 h-3.5 group-hover:-translate-y-0.5 transition-transform" />
+            <ArrowUp className="w-3.5 h-3.5 group-hover:-translate-y-0.5 transition-transform" aria-hidden="true" />
           </button>
 
           <span className="text-border" aria-hidden="true">|</span>

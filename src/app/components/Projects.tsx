@@ -50,7 +50,7 @@ export default function Projects() {
                   onClick={() => setSelectedCategory(cat)}
                   className={`px-3 py-1 rounded-[6px] font-mono text-xs uppercase tracking-[0.06em] transition-all btn-press ${
                     active
-                      ? "bg-accent text-white font-medium shadow-sm"
+                      ? "bg-accent text-white dark:text-[#0A0A0B] font-semibold shadow-sm"
                       : "text-muted hover:text-foreground"
                   }`}
                 >

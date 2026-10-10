@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { getPostBySlug, getAllPosts } from "@/lib/blog";
+import { getPostBySlug } from "@/lib/blog";
 
 export const runtime = "nodejs";
 
@@ -9,18 +9,11 @@ export const size = {
 };
 export const contentType = "image/png";
 
-interface Props {
-  params: {
-    slug: string;
-  };
-}
-
-export async function generateStaticParams() {
-  const posts = await getAllPosts(true);
-  return posts.map((post) => ({ slug: post.slug }));
-}
-
-export default async function Image({ params }: Props) {
+export default async function Image({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const post = await getPostBySlug(params.slug, true);
   const title = post ? post.title : "Blog Post";
   const description = post ? post.description : "Naman Gupta Engineering Blog";
