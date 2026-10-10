@@ -10,7 +10,7 @@ import {
   Code2,
 } from "lucide-react";
 
-export default function About({ hasPhoto = true }: { hasPhoto?: boolean }) {
+export default function About({ hasPhoto = false }: { hasPhoto?: boolean }) {
   const [photoError, setPhotoError] = useState(!hasPhoto);
   const [f1LightsActive, setF1LightsActive] = useState(false);
 
