@@ -29,15 +29,12 @@ export default function About({ hasPhoto = true }: { hasPhoto?: boolean }) {
               Software Developer
             </h2>
 
-            <div className="space-y-4 text-base leading-[1.7] text-muted max-w-prose">
+            <div className="space-y-3 text-sm sm:text-base leading-relaxed text-muted max-w-prose">
               <p>
-                I&apos;m from Delhi and completed my B.Tech in Information Technology at GGSIPU with a 9.2 CGPA.
+                Software developer from Delhi with a B.Tech in Information Technology from GGSIPU (9.2 CGPA).
               </p>
               <p>
-                I work across React, Node.js, Django, and PostgreSQL, adding LLM features where they solve real workflow bottlenecks. I enjoy building responsive frontends, optimising databases, and engineering robust distributed pipelines.
-              </p>
-              <p>
-                Outside of engineering systems, I love sports, movies, music, and exploring neuroscience and Formula 1.
+                I build fast, resilient web applications using React, Node.js, Django, and PostgreSQL, integrating LLM features to eliminate real workflow bottlenecks.
               </p>
             </div>
           </div>

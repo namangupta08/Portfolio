@@ -5,19 +5,19 @@ import path from "path";
 import type { Metadata } from "next";
 import { siteConfig } from "@/data/site";
 import { socialLinks } from "@/data/links";
-import { ArrowLeft, Download, ExternalLink, FileText, Mail } from "lucide-react";
+import { ArrowLeft, Download, ExternalLink, FileText } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Resume — Naman Gupta",
-  description: "Curriculum Vitae and background of Naman Gupta, Full Stack Software Engineer.",
+  description: "Curriculum Vitae and background of Naman Gupta, Software Developer.",
 };
 
 export default function ResumePage() {
-  const resumeFilePath = path.join(process.cwd(), "public", "Naman-Gupta-Resume.pdf");
-  const fileExists = fs.existsSync(resumeFilePath);
+  const resumePdfPath = path.join(process.cwd(), "public", "Naman-Gupta-Resume.pdf");
+  const fileExists = fs.existsSync(resumePdfPath);
 
   return (
-    <div className="py-12 sm:py-16 space-y-8">
+    <div className="py-10 sm:py-14 space-y-8 pb-36 sm:pb-40">
       {/* Top Header */}
       <div className="space-y-4">
         <Link
@@ -38,7 +38,7 @@ export default function ResumePage() {
             </p>
           </div>
 
-          {/* Action buttons (only show download/open if file exists) */}
+          {/* Action buttons */}
           {fileExists && (
             <div className="flex items-center gap-3">
               <a
@@ -64,41 +64,18 @@ export default function ResumePage() {
         </div>
       </div>
 
-      {/* Embedded Viewer (80vh height) or Resume coming soon fallback */}
+      {/* 100% Full View Resume Container */}
       {fileExists ? (
-        <>
-          {/* Mobile Notice */}
-          <div className="block sm:hidden p-4 rounded-[10px] bg-surface-subtle border border-border text-center space-y-2">
-            <p className="text-xs text-muted">
-              Mobile browsers do not always support inline PDF preview. Use the buttons above to download or open the resume in a new tab.
-            </p>
+        <div className="w-full rounded-[16px] border border-border bg-surface p-2 sm:p-4 shadow-xl">
+          <div className="relative w-full rounded-[10px] overflow-hidden bg-white shadow-sm border border-black/10">
+            {/* 100% Full High-Resolution Resume Page */}
+            <img
+              src="/Naman-Gupta-Resume.png"
+              alt="Naman Gupta Resume"
+              className="w-full h-auto object-contain block select-none"
+            />
           </div>
-
-          <div className="w-full rounded-[14px] border border-border bg-surface p-2 overflow-hidden shadow-sm">
-            <object
-              data="/Naman-Gupta-Resume.pdf#toolbar=0"
-              type="application/pdf"
-              className="w-full h-[80vh] rounded-[10px] border border-border/60 bg-background"
-            >
-              <iframe
-                src="/Naman-Gupta-Resume.pdf#toolbar=0"
-                className="w-full h-[80vh] rounded-[10px] border border-border/60 bg-background"
-                title="Naman Gupta Resume"
-              >
-                <div className="p-8 text-center text-sm text-muted space-y-3">
-                  <p>Your browser does not support inline PDF viewing.</p>
-                  <a
-                    href="/Naman-Gupta-Resume.pdf"
-                    download="Naman-Gupta-Resume.pdf"
-                    className="inline-flex items-center gap-1.5 text-accent underline"
-                  >
-                    Download Naman-Gupta-Resume.pdf directly
-                  </a>
-                </div>
-              </iframe>
-            </object>
-          </div>
-        </>
+        </div>
       ) : (
         <div className="rounded-[14px] border border-border bg-surface p-12 sm:p-16 text-center space-y-5">
           <div className="w-12 h-12 rounded-full bg-surface-subtle border border-border flex items-center justify-center mx-auto text-muted">
@@ -119,8 +96,7 @@ export default function ResumePage() {
               href={socialLinks.emailMailto}
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-accent text-white dark:text-[#0A0A0B] text-xs font-mono font-semibold hover:brightness-105 btn-press shadow-sm"
             >
-              <Mail className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>{socialLinks.email}</span>
+              <span>Contact via Email</span>
             </a>
           </div>
         </div>

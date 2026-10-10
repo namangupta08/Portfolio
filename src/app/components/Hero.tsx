@@ -95,29 +95,29 @@ interface TechBadge {
 }
 
 const marqueeRow1: TechBadge[] = [
-  { name: "TypeScript", icon: <SiTypescript className="w-3.5 h-3.5 text-[#3178C6]" /> },
-  { name: "Node.js", icon: <SiNodedotjs className="w-3.5 h-3.5 text-[#5FA04E]" /> },
-  { name: "React", icon: <SiReact className="w-3.5 h-3.5 text-[#61DAFB]" /> },
-  { name: "PostgreSQL", icon: <SiPostgresql className="w-3.5 h-3.5 text-[#4169E1]" /> },
-  { name: "Python", icon: <SiPython className="w-3.5 h-3.5 text-[#3776AB]" /> },
-  { name: "Django", icon: <SiDjango className="w-3.5 h-3.5 text-[#2BA977]" /> },
-  { name: "Docker", icon: <SiDocker className="w-3.5 h-3.5 text-[#2496ED]" /> },
-  { name: "C++", icon: <SiCplusplus className="w-3.5 h-3.5 text-[#00599C]" /> },
-  { name: "JavaScript", icon: <SiJavascript className="w-3.5 h-3.5 text-[#F7DF1E]" /> },
-  { name: "Redis", icon: <SiRedis className="w-3.5 h-3.5 text-[#DC382D]" /> },
+  { name: "TypeScript", icon: <SiTypescript color="#3178C6" style={{ color: "#3178C6" }} className="w-4 h-4" /> },
+  { name: "Node.js", icon: <SiNodedotjs color="#5FA04E" style={{ color: "#5FA04E" }} className="w-4 h-4" /> },
+  { name: "React", icon: <SiReact color="#61DAFB" style={{ color: "#61DAFB" }} className="w-4 h-4" /> },
+  { name: "PostgreSQL", icon: <SiPostgresql color="#4169E1" style={{ color: "#4169E1" }} className="w-4 h-4" /> },
+  { name: "Python", icon: <SiPython color="#3776AB" style={{ color: "#3776AB" }} className="w-4 h-4" /> },
+  { name: "Django", icon: <SiDjango color="#2BA977" style={{ color: "#2BA977" }} className="w-4 h-4" /> },
+  { name: "Docker", icon: <SiDocker color="#2496ED" style={{ color: "#2496ED" }} className="w-4 h-4" /> },
+  { name: "C++", icon: <SiCplusplus color="#00599C" style={{ color: "#00599C" }} className="w-4 h-4" /> },
+  { name: "JavaScript", icon: <SiJavascript color="#F7DF1E" style={{ color: "#F7DF1E" }} className="w-4 h-4" /> },
+  { name: "Redis", icon: <SiRedis color="#DC382D" style={{ color: "#DC382D" }} className="w-4 h-4" /> },
 ];
 
 const marqueeRow2: TechBadge[] = [
-  { name: "LangGraph", icon: <Network className="w-3.5 h-3.5 text-[#F97316]" /> },
-  { name: "LangChain", icon: <SiLangchain className="w-3.5 h-3.5 text-[#10B981]" /> },
-  { name: "Qdrant", icon: <Database className="w-3.5 h-3.5 text-[#DC2626]" /> },
-  { name: "Gemini", icon: <SiGooglegemini className="w-3.5 h-3.5 text-[#4285F4]" /> },
-  { name: "Express.js", icon: <SiExpress className="w-3.5 h-3.5 text-[#94A3B8] dark:text-[#CBD5E1]" /> },
-  { name: "MongoDB", icon: <SiMongodb className="w-3.5 h-3.5 text-[#47A248]" /> },
-  { name: "Firebase", icon: <SiFirebase className="w-3.5 h-3.5 text-[#FFCA28]" /> },
-  { name: "Git", icon: <SiGit className="w-3.5 h-3.5 text-[#F05032]" /> },
-  { name: "GitHub", icon: <SiGithub className="w-3.5 h-3.5 text-[#6E7681] dark:text-[#E6EDF3]" /> },
-  { name: "RAG", icon: <SearchCode className="w-3.5 h-3.5 text-[#A855F7]" /> },
+  { name: "LangGraph", icon: <Network color="#F97316" style={{ color: "#F97316" }} className="w-4 h-4" /> },
+  { name: "LangChain", icon: <SiLangchain color="#10B981" style={{ color: "#10B981" }} className="w-4 h-4" /> },
+  { name: "Qdrant", icon: <Database color="#DC2626" style={{ color: "#DC2626" }} className="w-4 h-4" /> },
+  { name: "Gemini", icon: <SiGooglegemini color="#4285F4" style={{ color: "#4285F4" }} className="w-4 h-4" /> },
+  { name: "Express.js", icon: <SiExpress color="#CBD5E1" style={{ color: "#CBD5E1" }} className="w-4 h-4" /> },
+  { name: "MongoDB", icon: <SiMongodb color="#47A248" style={{ color: "#47A248" }} className="w-4 h-4" /> },
+  { name: "Firebase", icon: <SiFirebase color="#FFCA28" style={{ color: "#FFCA28" }} className="w-4 h-4" /> },
+  { name: "Git", icon: <SiGit color="#F05032" style={{ color: "#F05032" }} className="w-4 h-4" /> },
+  { name: "GitHub", icon: <SiGithub color="#E2E8F0" style={{ color: "#E2E8F0" }} className="w-4 h-4" /> },
+  { name: "RAG", icon: <SearchCode color="#A855F7" style={{ color: "#A855F7" }} className="w-4 h-4" /> },
 ];
 
 export default function Hero() {
