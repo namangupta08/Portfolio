@@ -1,6 +1,7 @@
 export interface ExperienceHighlight {
   title: string;
   description: string;
+  icon: string;
   badge?: string;
 }
 
@@ -25,8 +26,7 @@ export const experiencesData: ExperienceRole[] = [
     period: "Jul 2025 - Present",
     isCurrent: true,
     logo: "/logos/epigee.png",
-    summary:
-      "Building finance and insurance workflow tools: reconciliation, document parsing, email triage and internal search.",
+    summary: "Building finance and insurance workflow tools.",
     tech: [
       "Django",
       "React",
@@ -39,31 +39,36 @@ export const experiencesData: ExperienceRole[] = [
     highlights: [
       {
         title: "Reconciliation platform",
+        icon: "Layers",
         description:
-          "Finance teams were matching invoices, bank statements and payment advice by hand across many client accounts. I built the platform end to end: admin and analyst roles, LLM-based document ingestion, per-client dashboards and split/part-payment handling.",
+          "Finance teams were matching invoices, bank statements and payment advice by hand across many client accounts. I built the platform with admin and analyst roles, LLM-based document ingestion, per-client dashboards and split/part-payment handling.",
         badge: "~70% less manual effort",
       },
       {
         title: "Matching engine",
+        icon: "GitMerge",
         description:
-          "Matching runs in layers: invoice number, then transaction reference, then client name and date, and anything left goes to a person. Approved manual matches can be saved as per-client learning rules, so similar payments come back as explainable suggestions.",
-        badge: "~75% auto-reconciled, ~40% fewer repeat reviews",
+          "Matching runs in layers: invoice number, then transaction reference, then client name and date, and anything left goes to a person. Approved manual matches become per-client learning rules that return explainable suggestions.",
+        badge: "~75% auto-reconciled",
       },
       {
         title: "Bank statement parser",
+        icon: "FileText",
         description:
-          "Per-bank parsers broke whenever a layout changed, so I replaced them with one LangGraph pipeline that maps statements to a single schema. LLMs can drop a row or misread an amount, so every extraction is checked against the statement's transaction count and debit and credit totals.",
-        badge: "10+ layouts, 90-95% field accuracy",
+          "Per-bank parsers broke when layouts changed, so I built one LangGraph pipeline that maps statements to a single schema and checks every extraction against the statement's transaction count and debit and credit totals.",
+        badge: "10+ layouts",
       },
       {
         title: "Email triage",
+        icon: "Mail",
         description:
-          "Insurance requests arrived by email and were sorted by hand. The service classifies each one into 7 categories, tracks status on an admin dashboard, keeps an audit trail of every action and sends automated client follow-ups.",
+          "Insurance requests are classified into 7 categories by an LLM, tracked on an admin dashboard with an audit trail, and followed up automatically.",
       },
       {
         title: "Internal RAG chatbot",
+        icon: "MessageSquare",
         description:
-          "Staff searched policy and customer data by hand. The chatbot answers from that data with chunking, embeddings in Qdrant and source citations.",
+          "Answers from company policy and customer data using chunking, Qdrant embeddings and source citations.",
       },
     ],
   },
@@ -74,23 +79,24 @@ export const experiencesData: ExperienceRole[] = [
     period: "May 2025 - Jun 2025",
     isCurrent: false,
     logo: "/logos/zevise.png",
-    summary:
-      "Short-form EdTech platform: lesson discovery, auth and content structure.",
-    tech: ["React.js", "JWT", "PostgreSQL"],
+    summary: "Short-form EdTech platform.",
+    tech: ["React.js", "JWT"],
     highlights: [
       {
         title: "UI redesign",
+        icon: "Smartphone",
         description:
           "Redesigned lesson discovery and learning screens, improving mobile responsiveness across 10+ screens.",
-        badge: "10+ screens",
       },
       {
         title: "Authentication",
+        icon: "KeyRound",
         description:
           "Built JWT auth with protected routes and token handling.",
       },
       {
         title: "Content model",
+        icon: "Database",
         description:
           "Designed the class, subject, chapter, topic schema for adaptive lesson delivery.",
       },
