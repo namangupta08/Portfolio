@@ -23,7 +23,7 @@ interface NavDockItem {
 const dockItems: NavDockItem[] = [
   { name: "Home", href: "/", icon: Home },
   { name: "Experience", href: "/#experience", sectionId: "experience", icon: Briefcase },
-  { name: "Projects", href: "/projects", icon: FolderGit2 },
+  { name: "Projects", href: "/#projects", sectionId: "projects", icon: FolderGit2 },
   { name: "Blog", href: "/blog", icon: BookOpen },
   { name: "Resume", href: "/resume", icon: FileText },
 ];

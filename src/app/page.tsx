@@ -1,34 +1,56 @@
 import React from "react";
+import Hero from "./components/Hero";
+import Activity from "./components/Activity";
+import About from "./components/About";
+import Experience from "./components/Experience";
+import Projects from "./components/Projects";
+import TechStack from "./components/TechStack";
+import Writing from "./components/Writing";
+import Contact from "./components/Contact";
+import { getActivityData } from "@/lib/activity";
+import { getAllPosts } from "@/lib/blog";
+
 import fs from "fs";
 import path from "path";
-import ExecutiveHero from "./components/ExecutiveHero";
-import ProjectSlideshow from "./components/ProjectSlideshow";
-import QuickDeck from "./components/QuickDeck";
-import TechStack from "./components/TechStack";
 
 export const revalidate = 43200; // 12 hours cache for static pages
 
 export default async function HomePage() {
+  const activityData = getActivityData();
+  const posts = await getAllPosts(true); // Include posts for review
+
   const publicDir = path.join(process.cwd(), "public");
   const hasAboutPhoto = fs.existsSync(path.join(publicDir, "about/me.jpg"));
+  const existingLogos = {
+    epigee: fs.existsSync(path.join(publicDir, "logos/epigee.png")),
+    zevise: fs.existsSync(path.join(publicDir, "logos/zevise.png")),
+  };
 
   return (
-    <div className="space-y-10 sm:space-y-12 pb-24 sm:pb-28">
-      {/* 1. EXECUTIVE HERO: Name, Details, About Me, Socials & Collapsed Experience */}
-      <ExecutiveHero hasPhoto={hasAboutPhoto} />
+    <div className="space-y-0">
+      {/* 1. HERO */}
+      <Hero />
 
-      {/* 2. PROJECT SLIDESHOW: Interactive 1-by-1 Project Slideshow */}
-      <section id="projects">
-        <ProjectSlideshow />
-      </section>
+      {/* 2. ACTIVITY (Coding activity grid) */}
+      <Activity data={activityData} />
 
-      {/* 3. QUICK DECK: Cards for Projects, Blogs, Resume, LinkedIn, LeetCode, GitHub */}
-      <section id="navigation-deck">
-        <QuickDeck />
-      </section>
+      {/* 3. ABOUT */}
+      <About hasPhoto={hasAboutPhoto} />
 
-      {/* 4. TECH STACK: Colored Technology Icons Below */}
+      {/* 4. EXPERIENCE */}
+      <Experience existingLogos={existingLogos} />
+
+      {/* 5. PROJECTS (Selected work) */}
+      <Projects />
+
+      {/* 6. TECH STACK (Stack) */}
       <TechStack />
+
+      {/* 7. WRITING */}
+      <Writing posts={posts} />
+
+      {/* 8. CONTACT */}
+      <Contact />
     </div>
   );
 }
