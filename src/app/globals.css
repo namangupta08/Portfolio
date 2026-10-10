@@ -3,45 +3,56 @@
 @tailwind utilities;
 
 :root {
-  /* Warm muted accent (terracotta) - single place to change accent */
-  --accent: #c4552e;
-  --accent-rgb: 196, 85, 46;
+  /* ONE accent: muted warm terracotta */
+  --accent: #C85A32;
+  --accent-rgb: 200, 90, 50;
 
-  /* Near-neutral light palette with WCAG AA compliance */
-  --background: #fbfbf9;
-  --foreground: #18181b;
-  --muted: #47474f;
-  --muted-dark: #52525b;
-  --border: #e4e4e7;
-  --surface: #ffffff;
+  /* Light theme: off-white structure */
+  --background: #FBFBFC;
+  --surface: #FFFFFF;
+  --surface-subtle: #F4F4F6;
+  --border: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.16);
+  --foreground: #18181B;
+  --muted: #71717A;
+  --muted-dark: #A1A1AA;
 }
 
 .dark {
-  /* Warm muted accent (terracotta) for dark theme */
-  --accent: #d97753;
-  --accent-rgb: 217, 119, 83;
+  /* Hero look: near-black */
+  --accent: #D06A4C;
+  --accent-rgb: 208, 106, 76;
 
-  /* Near-neutral dark palette */
-  --background: #111112;
-  --foreground: #f4f4f5;
-  --muted: #a1a1aa;
-  --muted-dark: #8b8b93;
-  --border: #27272a;
-  --surface: #18181b;
+  --background: #0A0A0B;
+  --surface: #111113;
+  --surface-subtle: #18181B;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.18);
+  --foreground: #EDEDED;
+  --muted: #A1A1AA;
+  --muted-dark: #71717A;
 }
 
 html {
   scroll-behavior: smooth;
-  transition: background-color 200ms ease, color 200ms ease;
+  scroll-padding-top: 5rem;
 }
 
 body {
   color: var(--foreground);
   background-color: var(--background);
-  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-geist-sans), "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  line-height: 1.6;
+  line-height: 1.7;
+}
+
+/* Background faint dotted grid with radial mask fading to the edges */
+.bg-dotted-grid {
+  background-image: radial-gradient(circle, rgba(120, 120, 128, 0.14) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse at 50% 25%, black 40%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 25%, black 40%, transparent 85%);
 }
 
 /* Accessible focus ring using the single accent color */
@@ -50,55 +61,80 @@ body {
   outline-offset: 2px;
 }
 
-/* Link underline animated slide-in on hover */
-.link-hover {
+/* Sliding underline for links */
+.sliding-underline {
   position: relative;
   text-decoration: none;
-  transition: color 150ms ease;
 }
 
-.link-hover::after {
+.sliding-underline::after {
   content: "";
   position: absolute;
   width: 100%;
   transform: scaleX(0);
   height: 1px;
-  bottom: -1px;
+  bottom: -2px;
   left: 0;
   background-color: var(--accent);
   transform-origin: bottom right;
-  transition: transform 200ms ease-out;
+  transition: transform 180ms ease-out;
 }
 
-.link-hover:hover::after {
+.sliding-underline:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
 
-.link-hover:hover {
-  color: var(--accent);
+/* Card lift 2px and border brightening */
+.card-hover {
+  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1), border-color 200ms ease;
 }
 
-/* Card subtle 2px hover lift with soft border color change */
-.card-lift {
-  transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
-}
-
-.card-lift:hover {
+.card-hover:hover {
   transform: translateY(-2px);
-  border-color: rgba(var(--accent-rgb), 0.45);
+  border-color: var(--border-strong);
 }
 
-/* Shiki dual-theme syntax highlighting */
+/* Button 1px press effect */
+.btn-press {
+  transition: transform 100ms ease, opacity 150ms ease, background-color 150ms ease;
+}
+
+.btn-press:active {
+  transform: translateY(1px);
+}
+
+/* Cursor following spotlight in accent at ~6% opacity */
+.cursor-spotlight {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, -1000px) var(--mouse-y, -1000px),
+    rgba(var(--accent-rgb), 0.06),
+    transparent 65%
+  );
+  transition: opacity 300ms ease;
+}
+
+@media (hover: none) or (pointer: coarse) {
+  .cursor-spotlight {
+    display: none !important;
+  }
+}
+
+/* Shiki code block styles */
 .shiki {
   padding: 1rem 1.25rem;
-  border-radius: 0.5rem;
+  border-radius: 10px;
   border: 1px solid var(--border);
   overflow-x: auto;
   font-family: var(--font-geist-mono), monospace;
   font-size: 0.85rem;
   line-height: 1.6;
   margin: 1.5rem 0;
+  background-color: var(--surface) !important;
 }
 
 html.dark .shiki,
@@ -132,7 +168,6 @@ html.dark .shiki span {
 .prose-content li {
   margin-top: 0.35rem;
   margin-bottom: 0.35rem;
-  color: var(--foreground);
 }
 
 .prose-content a {
@@ -144,13 +179,13 @@ html.dark .shiki span {
 .prose-content code:not(.shiki code) {
   font-family: var(--font-geist-mono), monospace;
   font-size: 0.875em;
-  background-color: rgba(120, 120, 128, 0.12);
+  background-color: rgba(120, 120, 128, 0.1);
   padding: 0.15rem 0.35rem;
   border-radius: 0.25rem;
   border: 1px solid var(--border);
 }
 
-/* Respect prefers-reduced-motion: disable animations and transforms */
+/* Respect prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -160,5 +195,8 @@ html.dark .shiki span {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
     transform: none !important;
+  }
+  .cursor-spotlight {
+    display: none !important;
   }
 }

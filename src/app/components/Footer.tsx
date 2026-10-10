@@ -1,89 +1,104 @@
 "use client";
 
 import React, { useState } from "react";
-import { personalData } from "@/data/portfolio";
-import { Github, Linkedin, Code2, Mail, Copy, Check } from "lucide-react";
+import { Github, Linkedin, Terminal, Mail, Check, Copy, ArrowUp } from "lucide-react";
+import { socialLinks } from "@/data/links";
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear();
   const [copied, setCopied] = useState(false);
 
-  const handleCopyEmail = async () => {
+  const copyEmail = async () => {
     try {
-      await navigator.clipboard.writeText(personalData.email);
+      await navigator.clipboard.writeText(socialLinks.email);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Fallback if clipboard API is unavailable
+      // Fallback
     }
   };
 
-  const currentYear = new Date().getFullYear();
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
-    <footer className="w-full border-t border-border mt-24 py-12 text-sm text-muted">
-      <div className="max-w-[720px] mx-auto px-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-        {/* Social / Contact Links */}
-        <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+    <footer className="w-full border-t border-border mt-20 py-12 text-sm text-muted bg-surface/30">
+      <div className="max-w-[1100px] mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+        {/* Left: Icon + Label Links */}
+        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-5 font-mono text-xs">
           <a
-            href={personalData.socials.github}
+            href={socialLinks.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 link-hover text-muted hover:text-accent transition-colors"
+            className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors group"
           >
-            <Github className="w-4 h-4" />
+            <Github className="w-3.5 h-3.5" />
             <span>GitHub</span>
           </a>
 
           <a
-            href={personalData.socials.linkedin}
+            href={socialLinks.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 link-hover text-muted hover:text-accent transition-colors"
+            className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors group"
           >
-            <Linkedin className="w-4 h-4" />
+            <Linkedin className="w-3.5 h-3.5" />
             <span>LinkedIn</span>
           </a>
 
           <a
-            href={personalData.socials.leetcode}
+            href={socialLinks.leetcode}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 link-hover text-muted hover:text-accent transition-colors"
+            className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors group"
           >
-            <Code2 className="w-4 h-4" />
+            <Terminal className="w-3.5 h-3.5" />
             <span>LeetCode</span>
           </a>
 
           <a
-            href={personalData.socials.email}
-            className="inline-flex items-center gap-1.5 link-hover text-muted hover:text-accent transition-colors"
+            href={socialLinks.emailMailto}
+            className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors group"
           >
-            <Mail className="w-4 h-4" />
+            <Mail className="w-3.5 h-3.5" />
             <span>Email</span>
           </a>
 
           <button
             type="button"
-            onClick={handleCopyEmail}
-            className="inline-flex items-center gap-1 px-2 py-1 rounded text-xs border border-border hover:border-foreground/30 text-muted hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            onClick={copyEmail}
+            aria-label="Copy email address"
+            className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded border border-border bg-surface hover:border-foreground/30 text-foreground transition-colors btn-press text-[11px]"
           >
             {copied ? (
               <>
-                <Check className="w-3.5 h-3.5 text-accent" />
-                <span className="text-accent font-medium">Copied!</span>
+                <Check className="w-3 h-3 text-accent" />
+                <span className="text-accent font-medium">Copied</span>
               </>
             ) : (
               <>
-                <Copy className="w-3.5 h-3.5" />
+                <Copy className="w-3 h-3 text-muted" />
                 <span>Copy email</span>
               </>
             )}
           </button>
         </div>
 
-        {/* Copyright */}
-        <div className="text-xs text-muted-dark font-mono">
-          © {currentYear} {personalData.name}
+        {/* Right: Back to top + Year */}
+        <div className="flex items-center gap-6 font-mono text-xs text-muted-dark">
+          <button
+            type="button"
+            onClick={scrollToTop}
+            className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded p-0.5"
+          >
+            <span>Back to top</span>
+            <ArrowUp className="w-3.5 h-3.5 group-hover:-translate-y-0.5 transition-transform" />
+          </button>
+
+          <span className="text-border" aria-hidden="true">|</span>
+
+          <span>© {currentYear} Naman Gupta</span>
         </div>
       </div>
     </footer>

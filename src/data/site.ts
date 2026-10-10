@@ -1,0 +1,47 @@
+export const siteConfig = {
+  name: "Naman Gupta",
+  monogram: "NG",
+  title: "Naman Gupta — Software Developer",
+  description:
+    "Backend-minded full-stack engineer who likes things fast and measurable. Specializing in Node.js, React, Django, PostgreSQL, and LLM automation.",
+  url: "https://namangupta.dev",
+  location: "Delhi, India",
+  timezone: "Asia/Kolkata",
+  status: "Open to SDE-1 roles",
+  degree: "B.Tech IT, 9.2 CGPA",
+  college: "GGSIPU",
+  metricsFootnote: "Measured in my own tests",
+  rotatingPhrases: [
+    "backend systems",
+    "React interfaces",
+    "LLM features",
+    "fast queries",
+  ],
+  heroMetrics: [
+    {
+      value: "31 ms",
+      label: "p95 on 3-month queries over 10,000 transactions (SpendWise)",
+      numericValue: 31,
+      unit: "ms",
+      prefix: "",
+    },
+    {
+      value: "0 of 324",
+      label: "jobs lost when a worker was killed mid-run (DocFlow)",
+      numericValue: 0,
+      unit: "of 324",
+      prefix: "",
+    },
+    {
+      value: "10+",
+      label: "bank statement layouts parsed into one schema (Epigee)",
+      numericValue: 10,
+      unit: "+",
+      prefix: "",
+    },
+  ],
+  resume: {
+    path: "/Naman-Gupta-Resume.pdf",
+    lastUpdated: "July 2025",
+  },
+};
