@@ -29,53 +29,53 @@ import { techStackData } from "@/data/stack";
 function getTechIcon(iconName: string) {
   switch (iconName) {
     case "SiCplusplus":
-      return <SiCplusplus className="w-3.5 h-3.5" />;
+      return <SiCplusplus className="w-3.5 h-3.5 text-[#00599C]" />;
     case "SiPython":
-      return <SiPython className="w-3.5 h-3.5" />;
+      return <SiPython className="w-3.5 h-3.5 text-[#3776AB]" />;
     case "SiJavascript":
-      return <SiJavascript className="w-3.5 h-3.5" />;
+      return <SiJavascript className="w-3.5 h-3.5 text-[#F7DF1E]" />;
     case "SiTypescript":
-      return <SiTypescript className="w-3.5 h-3.5" />;
+      return <SiTypescript className="w-3.5 h-3.5 text-[#3178C6]" />;
     case "SiPostgresql":
-      return <SiPostgresql className="w-3.5 h-3.5" />;
+      return <SiPostgresql className="w-3.5 h-3.5 text-[#4169E1]" />;
     case "SiReact":
-      return <SiReact className="w-3.5 h-3.5" />;
+      return <SiReact className="w-3.5 h-3.5 text-[#61DAFB]" />;
     case "SiNodedotjs":
-      return <SiNodedotjs className="w-3.5 h-3.5" />;
+      return <SiNodedotjs className="w-3.5 h-3.5 text-[#5FA04E]" />;
     case "SiExpress":
-      return <SiExpress className="w-3.5 h-3.5" />;
+      return <SiExpress className="w-3.5 h-3.5 text-[#94A3B8] dark:text-[#CBD5E1]" />;
     case "SiDjango":
-      return <SiDjango className="w-3.5 h-3.5" />;
+      return <SiDjango className="w-3.5 h-3.5 text-[#2BA977]" />;
     case "SiMongodb":
-      return <SiMongodb className="w-3.5 h-3.5" />;
+      return <SiMongodb className="w-3.5 h-3.5 text-[#47A248]" />;
     case "SiFirebase":
-      return <SiFirebase className="w-3.5 h-3.5" />;
+      return <SiFirebase className="w-3.5 h-3.5 text-[#FFCA28]" />;
     case "SiRedis":
-      return <SiRedis className="w-3.5 h-3.5" />;
+      return <SiRedis className="w-3.5 h-3.5 text-[#DC382D]" />;
     case "SiGit":
-      return <SiGit className="w-3.5 h-3.5" />;
+      return <SiGit className="w-3.5 h-3.5 text-[#F05032]" />;
     case "SiGithub":
-      return <SiGithub className="w-3.5 h-3.5" />;
+      return <SiGithub className="w-3.5 h-3.5 text-[#6E7681] dark:text-[#E6EDF3]" />;
     case "SiPostman":
-      return <SiPostman className="w-3.5 h-3.5" />;
+      return <SiPostman className="w-3.5 h-3.5 text-[#FF6C37]" />;
     case "SiDocker":
-      return <SiDocker className="w-3.5 h-3.5" />;
+      return <SiDocker className="w-3.5 h-3.5 text-[#2496ED]" />;
     case "SiAnthropic":
-      return <SiAnthropic className="w-3.5 h-3.5" />;
+      return <SiAnthropic className="w-3.5 h-3.5 text-[#D97706]" />;
     case "SiGooglegemini":
-      return <SiGooglegemini className="w-3.5 h-3.5" />;
+      return <SiGooglegemini className="w-3.5 h-3.5 text-[#4285F4]" />;
     case "SiOpenai":
-      return <SiOpenai className="w-3.5 h-3.5" />;
+      return <SiOpenai className="w-3.5 h-3.5 text-[#10A37F]" />;
     case "SiLangchain":
-      return <SiLangchain className="w-3.5 h-3.5" />;
+      return <SiLangchain className="w-3.5 h-3.5 text-[#10B981]" />;
     case "LangGraph":
-      return <Network className="w-3.5 h-3.5" />;
+      return <Network className="w-3.5 h-3.5 text-[#F97316]" />;
     case "Qdrant":
-      return <Database className="w-3.5 h-3.5" />;
+      return <Database className="w-3.5 h-3.5 text-[#DC2626]" />;
     case "RAG":
-      return <SearchCode className="w-3.5 h-3.5" />;
+      return <SearchCode className="w-3.5 h-3.5 text-[#A855F7]" />;
     default:
-      return <Database className="w-3.5 h-3.5" />;
+      return <Database className="w-3.5 h-3.5 text-[#3178C6]" />;
   }
 }
 
@@ -112,9 +112,9 @@ export default function TechStack() {
                 {group.items.map((item) => (
                   <div
                     key={item.name}
-                    className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-[8px] border border-border bg-surface text-muted hover:text-foreground hover:border-foreground/30 transition-all card-hover cursor-default"
+                    className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-[8px] border border-border bg-surface text-muted hover:text-foreground hover:border-foreground/30 transition-all card-hover cursor-default shadow-xs"
                   >
-                    <span className="text-muted-dark group-hover:text-accent transition-colors" aria-hidden="true">
+                    <span className="transition-transform group-hover:scale-110 shrink-0" aria-hidden="true">
                       {getTechIcon(item.iconName)}
                     </span>
                     <span className="font-mono text-xs font-medium text-foreground">

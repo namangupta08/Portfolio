@@ -95,29 +95,29 @@ interface TechBadge {
 }
 
 const marqueeRow1: TechBadge[] = [
-  { name: "TypeScript", icon: <SiTypescript className="w-3.5 h-3.5" /> },
-  { name: "Node.js", icon: <SiNodedotjs className="w-3.5 h-3.5" /> },
-  { name: "React", icon: <SiReact className="w-3.5 h-3.5" /> },
-  { name: "PostgreSQL", icon: <SiPostgresql className="w-3.5 h-3.5" /> },
-  { name: "Python", icon: <SiPython className="w-3.5 h-3.5" /> },
-  { name: "Django", icon: <SiDjango className="w-3.5 h-3.5" /> },
-  { name: "Docker", icon: <SiDocker className="w-3.5 h-3.5" /> },
-  { name: "C++", icon: <SiCplusplus className="w-3.5 h-3.5" /> },
-  { name: "JavaScript", icon: <SiJavascript className="w-3.5 h-3.5" /> },
-  { name: "Redis", icon: <SiRedis className="w-3.5 h-3.5" /> },
+  { name: "TypeScript", icon: <SiTypescript className="w-3.5 h-3.5 text-[#3178C6]" /> },
+  { name: "Node.js", icon: <SiNodedotjs className="w-3.5 h-3.5 text-[#5FA04E]" /> },
+  { name: "React", icon: <SiReact className="w-3.5 h-3.5 text-[#61DAFB]" /> },
+  { name: "PostgreSQL", icon: <SiPostgresql className="w-3.5 h-3.5 text-[#4169E1]" /> },
+  { name: "Python", icon: <SiPython className="w-3.5 h-3.5 text-[#3776AB]" /> },
+  { name: "Django", icon: <SiDjango className="w-3.5 h-3.5 text-[#2BA977]" /> },
+  { name: "Docker", icon: <SiDocker className="w-3.5 h-3.5 text-[#2496ED]" /> },
+  { name: "C++", icon: <SiCplusplus className="w-3.5 h-3.5 text-[#00599C]" /> },
+  { name: "JavaScript", icon: <SiJavascript className="w-3.5 h-3.5 text-[#F7DF1E]" /> },
+  { name: "Redis", icon: <SiRedis className="w-3.5 h-3.5 text-[#DC382D]" /> },
 ];
 
 const marqueeRow2: TechBadge[] = [
-  { name: "LangGraph", icon: <Network className="w-3.5 h-3.5" /> },
-  { name: "LangChain", icon: <SiLangchain className="w-3.5 h-3.5" /> },
-  { name: "Qdrant", icon: <Database className="w-3.5 h-3.5" /> },
-  { name: "Gemini", icon: <SiGooglegemini className="w-3.5 h-3.5" /> },
-  { name: "Express.js", icon: <SiExpress className="w-3.5 h-3.5" /> },
-  { name: "MongoDB", icon: <SiMongodb className="w-3.5 h-3.5" /> },
-  { name: "Firebase", icon: <SiFirebase className="w-3.5 h-3.5" /> },
-  { name: "Git", icon: <SiGit className="w-3.5 h-3.5" /> },
-  { name: "GitHub", icon: <SiGithub className="w-3.5 h-3.5" /> },
-  { name: "RAG", icon: <SearchCode className="w-3.5 h-3.5" /> },
+  { name: "LangGraph", icon: <Network className="w-3.5 h-3.5 text-[#F97316]" /> },
+  { name: "LangChain", icon: <SiLangchain className="w-3.5 h-3.5 text-[#10B981]" /> },
+  { name: "Qdrant", icon: <Database className="w-3.5 h-3.5 text-[#DC2626]" /> },
+  { name: "Gemini", icon: <SiGooglegemini className="w-3.5 h-3.5 text-[#4285F4]" /> },
+  { name: "Express.js", icon: <SiExpress className="w-3.5 h-3.5 text-[#94A3B8] dark:text-[#CBD5E1]" /> },
+  { name: "MongoDB", icon: <SiMongodb className="w-3.5 h-3.5 text-[#47A248]" /> },
+  { name: "Firebase", icon: <SiFirebase className="w-3.5 h-3.5 text-[#FFCA28]" /> },
+  { name: "Git", icon: <SiGit className="w-3.5 h-3.5 text-[#F05032]" /> },
+  { name: "GitHub", icon: <SiGithub className="w-3.5 h-3.5 text-[#6E7681] dark:text-[#E6EDF3]" /> },
+  { name: "RAG", icon: <SearchCode className="w-3.5 h-3.5 text-[#A855F7]" /> },
 ];
 
 export default function Hero() {
@@ -321,15 +321,15 @@ export default function Hero() {
               {[...marqueeRow1, ...marqueeRow1].map((tech, i) => (
                 <div
                   key={`${tech.name}-${i}`}
-                  className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-[8px] border border-border bg-surface text-muted hover:text-accent hover:border-accent/40 transition-colors cursor-default select-none"
+                  className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-[8px] border border-border bg-surface text-muted hover:text-foreground hover:border-foreground/30 transition-all cursor-default select-none shadow-xs"
                 >
                   <span
-                    className="text-muted-dark group-hover:text-accent transition-colors"
+                    className="transition-transform group-hover:scale-110 shrink-0"
                     aria-hidden="true"
                   >
                     {tech.icon}
                   </span>
-                  <span className="font-mono text-xs font-medium text-foreground group-hover:text-accent transition-colors">
+                  <span className="font-mono text-xs font-medium text-foreground">
                     {tech.name}
                   </span>
                 </div>
@@ -343,15 +343,15 @@ export default function Hero() {
               {[...marqueeRow2, ...marqueeRow2].map((tech, i) => (
                 <div
                   key={`${tech.name}-${i}`}
-                  className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-[8px] border border-border bg-surface text-muted hover:text-accent hover:border-accent/40 transition-colors cursor-default select-none"
+                  className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-[8px] border border-border bg-surface text-muted hover:text-foreground hover:border-foreground/30 transition-all cursor-default select-none shadow-xs"
                 >
                   <span
-                    className="text-muted-dark group-hover:text-accent transition-colors"
+                    className="transition-transform group-hover:scale-110 shrink-0"
                     aria-hidden="true"
                   >
                     {tech.icon}
                   </span>
-                  <span className="font-mono text-xs font-medium text-foreground group-hover:text-accent transition-colors">
+                  <span className="font-mono text-xs font-medium text-foreground">
                     {tech.name}
                   </span>
                 </div>

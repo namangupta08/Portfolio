@@ -4,13 +4,13 @@ import React, { useState } from "react";
 import {
   Trophy,
   Gauge,
+  Film,
+  Music,
+  Brain,
   Code2,
-  Zap,
-  Hammer,
-  PenLine,
 } from "lucide-react";
 
-export default function About({ hasPhoto = false }: { hasPhoto?: boolean }) {
+export default function About({ hasPhoto = true }: { hasPhoto?: boolean }) {
   const [photoError, setPhotoError] = useState(!hasPhoto);
   const [f1LightsActive, setF1LightsActive] = useState(false);
 
@@ -26,7 +26,7 @@ export default function About({ hasPhoto = false }: { hasPhoto?: boolean }) {
             </span>
 
             <h2 className="text-[2.25rem] font-semibold tracking-[-0.02em] text-foreground leading-[1.15]">
-              Backend-minded full-stack engineer who likes things fast and measurable.
+              Software Developer
             </h2>
 
             <div className="space-y-4 text-base leading-[1.7] text-muted max-w-prose">
@@ -34,10 +34,10 @@ export default function About({ hasPhoto = false }: { hasPhoto?: boolean }) {
                 I&apos;m from Delhi and completed my B.Tech in Information Technology at GGSIPU with a 9.2 CGPA.
               </p>
               <p>
-                I work across React, Node.js, Django, and PostgreSQL, adding LLM features where they solve real workflow bottlenecks. I enjoy optimising systems and measuring the concrete performance result.
+                I work across React, Node.js, Django, and PostgreSQL, adding LLM features where they solve real workflow bottlenecks. I enjoy building responsive frontends, optimising databases, and engineering robust distributed pipelines.
               </p>
               <p>
-                Outside of building systems, I love sports and Formula 1, and I regularly keep my data structures and problem-solving sharp on LeetCode.
+                Outside of engineering systems, I love sports, movies, music, and exploring neuroscience and Formula 1.
               </p>
             </div>
           </div>
@@ -92,7 +92,46 @@ export default function About({ hasPhoto = false }: { hasPhoto?: boolean }) {
               </p>
             </div>
 
-            {/* Card 2: Formula 1 (Hidden favorite team line until filled) */}
+            {/* Card 2: Movies */}
+            <div className="p-5 rounded-[14px] border border-border bg-surface card-hover group flex flex-col justify-between">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-md bg-surface-subtle text-foreground border border-border/50 group-hover:-translate-y-1 transition-transform">
+                  <Film className="w-4 h-4 text-accent" aria-hidden="true" />
+                </div>
+                <h3 className="font-semibold text-sm text-foreground">Movies</h3>
+              </div>
+              <p className="mt-3 text-xs font-mono text-muted">
+                Cinema, psychological thrillers & sci-fi classics.
+              </p>
+            </div>
+
+            {/* Card 3: Music */}
+            <div className="p-5 rounded-[14px] border border-border bg-surface card-hover group flex flex-col justify-between">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-md bg-surface-subtle text-foreground border border-border/50 group-hover:-translate-y-1 transition-transform">
+                  <Music className="w-4 h-4 text-accent" aria-hidden="true" />
+                </div>
+                <h3 className="font-semibold text-sm text-foreground">Music</h3>
+              </div>
+              <p className="mt-3 text-xs font-mono text-muted">
+                Deep focus tracks, ambient electronic & lo-fi beats.
+              </p>
+            </div>
+
+            {/* Card 4: Neuroscience */}
+            <div className="p-5 rounded-[14px] border border-border bg-surface card-hover group flex flex-col justify-between">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-md bg-surface-subtle text-foreground border border-border/50 group-hover:-translate-y-1 transition-transform">
+                  <Brain className="w-4 h-4 text-accent" aria-hidden="true" />
+                </div>
+                <h3 className="font-semibold text-sm text-foreground">Neuroscience</h3>
+              </div>
+              <p className="mt-3 text-xs font-mono text-muted">
+                Cognitive architecture, brain plasticity & human perception.
+              </p>
+            </div>
+
+            {/* Card 5: Formula 1 */}
             <div
               onMouseEnter={() => setF1LightsActive(true)}
               onMouseLeave={() => setF1LightsActive(false)}
@@ -101,12 +140,12 @@ export default function About({ hasPhoto = false }: { hasPhoto?: boolean }) {
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="p-2 rounded-md bg-surface-subtle text-foreground border border-border/50">
-                    <Gauge className="w-4 h-4" aria-hidden="true" />
+                    <Gauge className="w-4 h-4 text-accent" aria-hidden="true" />
                   </div>
                   <h3 className="font-semibold text-sm text-foreground">Formula 1</h3>
                 </div>
 
-                {/* 5 Race Start Lights that light up in sequence on hover */}
+                {/* 5 Race Start Lights */}
                 <div className="flex items-center gap-1" aria-hidden="true">
                   {[0, 1, 2, 3, 4].map((i) => (
                     <span
@@ -123,62 +162,21 @@ export default function About({ hasPhoto = false }: { hasPhoto?: boolean }) {
                   ))}
                 </div>
               </div>
-            </div>
-
-            {/* Card 3: Coding */}
-            <div className="p-5 rounded-[14px] border border-border bg-surface card-hover group">
-              <div className="flex items-center gap-3">
-                <div className="p-2 rounded-md bg-surface-subtle text-foreground border border-border/50">
-                  <Code2 className="w-4 h-4" aria-hidden="true" />
-                </div>
-                <h3 className="font-semibold text-sm text-foreground">Coding</h3>
-              </div>
-              <div className="mt-3 text-xs font-mono text-muted flex items-center gap-1">
-                <span>DSA drills & LeetCode</span>
-                <span className="w-1.5 h-3.5 bg-accent inline-block animate-pulse" aria-hidden="true" />
-              </div>
-            </div>
-
-            {/* Card 4: Optimising (plain text: I like measuring things before and after.) */}
-            <div className="p-5 rounded-[14px] border border-border bg-surface card-hover group">
-              <div className="flex items-center gap-3">
-                <div className="p-2 rounded-md bg-surface-subtle text-foreground border border-border/50">
-                  <Zap className="w-4 h-4 text-accent" aria-hidden="true" />
-                </div>
-                <h3 className="font-semibold text-sm text-foreground">Optimising</h3>
-              </div>
               <p className="mt-3 text-xs font-mono text-muted">
-                I like measuring things before and after.
+                Telemetry, aerodynamics & race strategy.
               </p>
             </div>
 
-            {/* Card 5: Building from scratch */}
-            <div className="p-5 rounded-[14px] border border-border bg-surface card-hover group">
+            {/* Card 6: Building & Coding */}
+            <div className="p-5 rounded-[14px] border border-border bg-surface card-hover group flex flex-col justify-between">
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-md bg-surface-subtle text-foreground border border-border/50 group-hover:rotate-12 transition-transform">
-                  <Hammer className="w-4 h-4" aria-hidden="true" />
+                <div className="p-2 rounded-md bg-surface-subtle text-foreground border border-border/50">
+                  <Code2 className="w-4 h-4 text-accent" aria-hidden="true" />
                 </div>
-                <h3 className="font-semibold text-sm text-foreground">
-                  Building from scratch
-                </h3>
+                <h3 className="font-semibold text-sm text-foreground">Building software</h3>
               </div>
               <p className="mt-3 text-xs font-mono text-muted">
-                Turning ideas into functional, reliable software.
-              </p>
-            </div>
-
-            {/* Card 6: Learning in public */}
-            <div className="p-5 rounded-[14px] border border-border bg-surface card-hover group">
-              <div className="flex items-center gap-3">
-                <div className="p-2 rounded-md bg-surface-subtle text-foreground border border-border/50 group-hover:-translate-y-0.5 transition-transform">
-                  <PenLine className="w-4 h-4" aria-hidden="true" />
-                </div>
-                <h3 className="font-semibold text-sm text-foreground">
-                  Learning in public
-                </h3>
-              </div>
-              <p className="mt-3 text-xs font-mono text-muted">
-                Documenting engineering benchmarks and honest trade-offs.
+                Turning ideas into functional, reliable, and fast products.
               </p>
             </div>
           </div>

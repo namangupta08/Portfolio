@@ -2,13 +2,9 @@
 
 import React, { useState } from "react";
 import { featuredProjects, moreProjects, ProjectCategory } from "@/data/projects";
-import {
-  WideFeaturedProjectCard,
-  HalfFeaturedProjectCard,
-  CompactProjectCard,
-} from "./ProjectCard";
+import { ShowcaseProjectCard } from "./ProjectCard";
 
-const filterCategories: ProjectCategory[] = ["All", "Backend", "Full-stack", "AI"];
+const filterCategories: ProjectCategory[] = ["All", "Full-stack", "AI", "Backend"];
 
 export default function Projects() {
   const [selectedCategory, setSelectedCategory] = useState<ProjectCategory>("All");
@@ -18,7 +14,6 @@ export default function Projects() {
     return p.category === selectedCategory;
   });
 
-  // Hide any project without data (only show projects with a valid summary)
   const validMoreProjects = moreProjects.filter(
     (p) => p.summary && p.summary.trim().length > 0
   );
@@ -27,9 +22,6 @@ export default function Projects() {
     if (selectedCategory === "All") return true;
     return p.category === selectedCategory;
   });
-
-  const firstWideProject = filteredFeatured[0];
-  const remainingFeatured = filteredFeatured.slice(1);
 
   return (
     <section id="projects" className="py-[72px] lg:py-[112px] border-t border-border">
@@ -44,7 +36,7 @@ export default function Projects() {
               Selected work
             </h2>
             <p className="text-sm text-muted">
-              Systems, developer tools, and full-stack applications with measured performance.
+              Production web applications, AI systems, and scalable backend platforms.
             </p>
           </div>
 
@@ -76,37 +68,30 @@ export default function Projects() {
           </div>
         </div>
 
-        {/* Featured Bento Layout: First full-width, next two half-width */}
-        <div className="space-y-6">
-          {firstWideProject && (
-            <WideFeaturedProjectCard
-              project={firstWideProject}
-              hasScreenshot={Boolean(firstWideProject.screenshot)}
+        {/* Primary Showcase Tiles: SpendWise, VistaVoyage, Zevise, DocFlow */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {filteredFeatured.map((project) => (
+            <ShowcaseProjectCard
+              key={project.slug}
+              project={project}
+              hasScreenshot={Boolean(project.screenshot)}
             />
-          )}
+          ))}
+        </div>
 
-          {remainingFeatured.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {remainingFeatured.map((project) => (
-                <HalfFeaturedProjectCard
+        {/* More Work: Swift Cab, Study Notion, ChatX */}
+        {filteredMore.length > 0 && (
+          <div className="pt-8 space-y-6">
+            <h3 className="font-mono text-xs uppercase tracking-[0.08em] text-muted-dark">
+              More work
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredMore.map((project) => (
+                <ShowcaseProjectCard
                   key={project.slug}
                   project={project}
                   hasScreenshot={Boolean(project.screenshot)}
                 />
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* More Work (2-column compact grid, hiding any with missing data) */}
-        {filteredMore.length > 0 && (
-          <div className="pt-6 space-y-4">
-            <h3 className="font-mono text-xs uppercase tracking-[0.08em] text-muted-dark">
-              More work
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {filteredMore.map((project) => (
-                <CompactProjectCard key={project.slug} project={project} />
               ))}
             </div>
           </div>

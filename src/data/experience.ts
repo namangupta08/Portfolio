@@ -35,7 +35,6 @@ export const experiencesData: ExperienceRole[] = [
       "LangChain",
       "Qdrant",
     ],
-    footnote: "Metrics are from internal testing on sample data.",
     highlights: [
       {
         title: "Reconciliation platform",

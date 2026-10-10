@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { allProjects, ProjectCategory } from "@/data/projects";
-import { HalfFeaturedProjectCard, CompactProjectCard } from "@/app/components/ProjectCard";
+import { ShowcaseProjectCard } from "@/app/components/ProjectCard";
 
-const filterCategories: ProjectCategory[] = ["All", "Backend", "Full-stack", "AI"];
+const filterCategories: ProjectCategory[] = ["All", "Full-stack", "AI", "Backend"];
 
 export default function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState<ProjectCategory>("All");
@@ -17,11 +17,10 @@ export default function ProjectsPage() {
   });
 
   const featured = filtered.filter((p) => p.isFeatured);
-  // Hide any project without summary data
   const other = filtered.filter((p) => !p.isFeatured && p.summary && p.summary.trim().length > 0);
 
   return (
-    <div className="py-12 sm:py-16 space-y-10">
+    <div className="py-12 sm:py-16 space-y-12">
       {/* Header */}
       <div className="space-y-4">
         <Link
@@ -38,7 +37,7 @@ export default function ProjectsPage() {
               Projects
             </h1>
             <p className="mt-1 text-base text-muted max-w-prose">
-              Selected systems, tools, and platforms built by Naman Gupta.
+              Production web applications, AI systems, and scalable backend platforms.
             </p>
           </div>
 
@@ -73,10 +72,10 @@ export default function ProjectsPage() {
 
       {/* Featured Projects */}
       {featured.length > 0 && (
-        <div className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {featured.map((p) => (
-              <HalfFeaturedProjectCard
+              <ShowcaseProjectCard
                 key={p.slug}
                 project={p}
                 hasScreenshot={Boolean(p.screenshot)}
@@ -86,15 +85,19 @@ export default function ProjectsPage() {
         </div>
       )}
 
-      {/* More Projects */}
+      {/* Additional Projects */}
       {other.length > 0 && (
-        <div className="pt-6 space-y-4">
+        <div className="pt-6 space-y-6">
           <h2 className="font-mono text-xs uppercase tracking-[0.08em] text-muted-dark">
-            Additional repositories & platforms
+            Additional platforms & tools
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {other.map((p) => (
-              <CompactProjectCard key={p.slug} project={p} />
+              <ShowcaseProjectCard
+                key={p.slug}
+                project={p}
+                hasScreenshot={Boolean(p.screenshot)}
+              />
             ))}
           </div>
         </div>

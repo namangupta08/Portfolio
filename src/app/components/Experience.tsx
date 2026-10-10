@@ -232,11 +232,6 @@ export default function Experience({
             />
           ))}
         </div>
-
-        {/* Epigee Footnote in small muted text */}
-        <p className="text-xs font-mono text-muted-dark pt-2">
-          Metrics are from internal testing on sample data.
-        </p>
       </div>
     </section>
   );

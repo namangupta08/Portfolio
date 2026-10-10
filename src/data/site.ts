@@ -12,7 +12,6 @@ export const siteConfig = {
   degree: "B.Tech IT, 9.2 CGPA",
   college: "GGSIPU",
   education: "B.Tech in Information Technology, GGSIPU Delhi, 2021-2025, CGPA 9.2/10",
-  metricsFootnote: "Metrics are from internal testing on sample data.",
   rotatingPhrases: [
     "backend systems",
     "React interfaces",

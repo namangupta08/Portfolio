@@ -55,14 +55,6 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
           <span className="font-mono text-xs uppercase tracking-[0.08em] text-muted-dark">
             {project.category}
           </span>
-          {project.metricBadge && (
-            <>
-              <span className="text-border" aria-hidden="true">·</span>
-              <span className="font-mono text-xs text-accent font-medium">
-                {project.metricBadge}
-              </span>
-            </>
-          )}
         </div>
 
         <h1 className="text-3xl sm:text-4xl font-semibold tracking-[-0.03em] text-foreground">
