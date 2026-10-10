@@ -120,6 +120,46 @@ body {
   animation: wordReveal 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+/* Edge-faded Tech Marquee */
+@keyframes marqueeLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marqueeRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.marquee-track-left {
+  animation: marqueeLeft 36s linear infinite;
+}
+
+.marquee-track-right {
+  animation: marqueeRight 36s linear infinite;
+}
+
+.marquee-container:hover .marquee-track-left,
+.marquee-container:hover .marquee-track-right {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track-left,
+  .marquee-track-right {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
 /* Cursor following spotlight in accent at ~6% opacity */
 .cursor-spotlight {
   pointer-events: none;

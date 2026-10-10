@@ -9,66 +9,116 @@ import {
   GraduationCap,
   ArrowDown,
   FileText,
+  Network,
+  Database,
+  SearchCode,
 } from "lucide-react";
-import { SiGithub, SiLinkedin, SiLeetcode } from "react-icons/si";
+import {
+  SiGithub,
+  SiLinkedin,
+  SiLeetcode,
+  SiCplusplus,
+  SiPython,
+  SiJavascript,
+  SiTypescript,
+  SiReact,
+  SiNodedotjs,
+  SiExpress,
+  SiDjango,
+  SiPostgresql,
+  SiDocker,
+  SiRedis,
+  SiMongodb,
+  SiFirebase,
+  SiGit,
+  SiLangchain,
+  SiGooglegemini,
+} from "react-icons/si";
 import { siteConfig } from "@/data/site";
 import { socialLinks } from "@/data/links";
 
-function CountUpNumber({
-  target,
-  duration = 1.0,
-  suffix = "",
-  prefix = "",
+// Magnetic Button Wrapper (max 6px shift, desktop only, disabled under reduced motion)
+function MagneticWrapper({
+  children,
+  className,
 }: {
-  target: number;
-  duration?: number;
-  suffix?: string;
-  prefix?: string;
+  children: React.ReactNode;
+  className?: string;
 }) {
-  const [current, setCurrent] = useState(target);
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const elementRef = useRef<HTMLSpanElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
 
-  useEffect(() => {
-    const el = elementRef.current;
-    if (!el || hasAnimated) return;
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia("(pointer: coarse)").matches) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !hasAnimated) {
-          setHasAnimated(true);
-          setCurrent(0);
-          const startTime = performance.now();
-          const step = (now: number) => {
-            const elapsed = (now - startTime) / 1000;
-            const progress = Math.min(1, elapsed / duration);
-            const easeProgress = 1 - Math.pow(1 - progress, 3);
-            setCurrent(Math.floor(easeProgress * target));
+    const el = ref.current;
+    if (!el) return;
+    const { left, top, width, height } = el.getBoundingClientRect();
+    const centerX = left + width / 2;
+    const centerY = top + height / 2;
 
-            if (progress < 1) {
-              requestAnimationFrame(step);
-            } else {
-              setCurrent(target);
-            }
-          };
-          requestAnimationFrame(step);
-        }
-      },
-      { threshold: 0.2 }
-    );
+    const deltaX = (e.clientX - centerX) / (width / 2);
+    const deltaY = (e.clientY - centerY) / (height / 2);
+    const shiftX = Math.max(-6, Math.min(6, deltaX * 6));
+    const shiftY = Math.max(-6, Math.min(6, deltaY * 6));
+    setPosition({ x: shiftX, y: shiftY });
+  };
 
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [hasAnimated, target, duration]);
+  const handleMouseLeave = () => {
+    setPosition({ x: 0, y: 0 });
+  };
 
   return (
-    <span ref={elementRef}>
-      {prefix}
-      {current}
-      {suffix}
-    </span>
+    <div
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
+        transition:
+          position.x === 0 && position.y === 0
+            ? "transform 250ms ease-out"
+            : "transform 80ms ease-out",
+      }}
+      className={className}
+    >
+      {children}
+    </div>
   );
 }
+
+interface TechBadge {
+  name: string;
+  icon: React.ReactNode;
+}
+
+const marqueeRow1: TechBadge[] = [
+  { name: "TypeScript", icon: <SiTypescript className="w-3.5 h-3.5" /> },
+  { name: "Node.js", icon: <SiNodedotjs className="w-3.5 h-3.5" /> },
+  { name: "React", icon: <SiReact className="w-3.5 h-3.5" /> },
+  { name: "PostgreSQL", icon: <SiPostgresql className="w-3.5 h-3.5" /> },
+  { name: "Python", icon: <SiPython className="w-3.5 h-3.5" /> },
+  { name: "Django", icon: <SiDjango className="w-3.5 h-3.5" /> },
+  { name: "Docker", icon: <SiDocker className="w-3.5 h-3.5" /> },
+  { name: "C++", icon: <SiCplusplus className="w-3.5 h-3.5" /> },
+  { name: "JavaScript", icon: <SiJavascript className="w-3.5 h-3.5" /> },
+  { name: "Redis", icon: <SiRedis className="w-3.5 h-3.5" /> },
+];
+
+const marqueeRow2: TechBadge[] = [
+  { name: "LangGraph", icon: <Network className="w-3.5 h-3.5" /> },
+  { name: "LangChain", icon: <SiLangchain className="w-3.5 h-3.5" /> },
+  { name: "Qdrant", icon: <Database className="w-3.5 h-3.5" /> },
+  { name: "Gemini", icon: <SiGooglegemini className="w-3.5 h-3.5" /> },
+  { name: "Express.js", icon: <SiExpress className="w-3.5 h-3.5" /> },
+  { name: "MongoDB", icon: <SiMongodb className="w-3.5 h-3.5" /> },
+  { name: "Firebase", icon: <SiFirebase className="w-3.5 h-3.5" /> },
+  { name: "Git", icon: <SiGit className="w-3.5 h-3.5" /> },
+  { name: "GitHub", icon: <SiGithub className="w-3.5 h-3.5" /> },
+  { name: "RAG", icon: <SearchCode className="w-3.5 h-3.5" /> },
+];
 
 export default function Hero() {
   const [phraseIndex, setPhraseIndex] = useState(0);
@@ -205,25 +255,29 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Action Buttons Row */}
+        {/* Action Buttons Row with magnetic effect */}
         <div className="flex flex-wrap items-center gap-3 pt-2">
           {/* Primary CTA (accent) */}
-          <a
-            href="#projects"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-[10px] bg-accent text-white dark:text-[#0A0A0B] text-sm font-semibold hover:brightness-105 btn-press shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-          >
-            <span>View my work</span>
-            <ArrowDown className="w-4 h-4" aria-hidden="true" />
-          </a>
+          <MagneticWrapper>
+            <a
+              href="#projects"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-[10px] bg-accent text-white dark:text-[#0A0A0B] text-sm font-semibold hover:brightness-105 btn-press shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            >
+              <span>View my work</span>
+              <ArrowDown className="w-4 h-4" aria-hidden="true" />
+            </a>
+          </MagneticWrapper>
 
           {/* Secondary CTA */}
-          <Link
-            href="/resume"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-[10px] border border-border bg-surface text-sm font-medium text-foreground hover:border-foreground/30 btn-press focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-          >
-            <FileText className="w-4 h-4 text-muted" aria-hidden="true" />
-            <span>Resume</span>
-          </Link>
+          <MagneticWrapper>
+            <Link
+              href="/resume"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-[10px] border border-border bg-surface text-sm font-medium text-foreground hover:border-foreground/30 btn-press focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            >
+              <FileText className="w-4 h-4 text-muted" aria-hidden="true" />
+              <span>Resume</span>
+            </Link>
+          </MagneticWrapper>
 
           {/* Social Icon Buttons */}
           <div className="flex items-center gap-2 sm:ml-2">
@@ -259,50 +313,49 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* 3 Metric Tiles Row */}
-        <div className="pt-6 sm:pt-10">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {/* Metric 1 */}
-            <div className="p-5 rounded-[14px] border border-border bg-surface card-hover">
-              <div className="font-mono text-2xl sm:text-3xl font-semibold tracking-tight text-foreground flex items-baseline gap-1">
-                <CountUpNumber target={31} />
-                <span className="text-accent text-lg sm:text-xl font-medium">ms</span>
-              </div>
-              <p className="mt-2 text-xs font-mono text-muted uppercase tracking-[0.08em] leading-relaxed">
-                p95 on 3-month queries over 10,000 transactions (SpendWise)
-              </p>
-              <span className="block mt-3 text-[10px] font-mono text-muted-dark">
-                {siteConfig.metricsFootnote}
-              </span>
+        {/* Quiet Infinite Edge-Faded Tech Marquee replacing the 3 metric tiles */}
+        <div className="pt-8 sm:pt-12 marquee-container space-y-3">
+          <div className="relative overflow-hidden w-full py-1 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+            {/* Row 1: Left moving */}
+            <div className="flex gap-2.5 w-max marquee-track-left">
+              {[...marqueeRow1, ...marqueeRow1].map((tech, i) => (
+                <div
+                  key={`${tech.name}-${i}`}
+                  className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-[8px] border border-border bg-surface text-muted hover:text-accent hover:border-accent/40 transition-colors cursor-default select-none"
+                >
+                  <span
+                    className="text-muted-dark group-hover:text-accent transition-colors"
+                    aria-hidden="true"
+                  >
+                    {tech.icon}
+                  </span>
+                  <span className="font-mono text-xs font-medium text-foreground group-hover:text-accent transition-colors">
+                    {tech.name}
+                  </span>
+                </div>
+              ))}
             </div>
+          </div>
 
-            {/* Metric 2 */}
-            <div className="p-5 rounded-[14px] border border-border bg-surface card-hover">
-              <div className="font-mono text-2xl sm:text-3xl font-semibold tracking-tight text-foreground flex items-baseline gap-1">
-                <span>0</span>
-                <span className="text-muted font-normal text-lg sm:text-xl">of</span>
-                <CountUpNumber target={324} />
-              </div>
-              <p className="mt-2 text-xs font-mono text-muted uppercase tracking-[0.08em] leading-relaxed">
-                jobs lost when a worker was killed mid-run (DocFlow)
-              </p>
-              <span className="block mt-3 text-[10px] font-mono text-muted-dark">
-                {siteConfig.metricsFootnote}
-              </span>
-            </div>
-
-            {/* Metric 3 */}
-            <div className="p-5 rounded-[14px] border border-border bg-surface card-hover">
-              <div className="font-mono text-2xl sm:text-3xl font-semibold tracking-tight text-foreground flex items-baseline gap-1">
-                <CountUpNumber target={10} />
-                <span className="text-accent font-medium">+</span>
-              </div>
-              <p className="mt-2 text-xs font-mono text-muted uppercase tracking-[0.08em] leading-relaxed">
-                bank statement layouts parsed into one schema (Epigee)
-              </p>
-              <span className="block mt-3 text-[10px] font-mono text-muted-dark">
-                {siteConfig.metricsFootnote}
-              </span>
+          <div className="relative overflow-hidden w-full py-1 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+            {/* Row 2: Right moving */}
+            <div className="flex gap-2.5 w-max marquee-track-right">
+              {[...marqueeRow2, ...marqueeRow2].map((tech, i) => (
+                <div
+                  key={`${tech.name}-${i}`}
+                  className="group inline-flex items-center gap-2 px-3 py-1.5 rounded-[8px] border border-border bg-surface text-muted hover:text-accent hover:border-accent/40 transition-colors cursor-default select-none"
+                >
+                  <span
+                    className="text-muted-dark group-hover:text-accent transition-colors"
+                    aria-hidden="true"
+                  >
+                    {tech.icon}
+                  </span>
+                  <span className="font-mono text-xs font-medium text-foreground group-hover:text-accent transition-colors">
+                    {tech.name}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
