@@ -13,7 +13,6 @@ import {
 export default function About({ hasPhoto = false }: { hasPhoto?: boolean }) {
   const [photoError, setPhotoError] = useState(!hasPhoto);
   const [f1LightsActive, setF1LightsActive] = useState(false);
-  const [optimisingHover, setOptimisingHover] = useState(false);
 
   return (
     <section id="about" className="py-[72px] lg:py-[112px] border-t border-border">
@@ -80,24 +79,21 @@ export default function About({ hasPhoto = false }: { hasPhoto?: boolean }) {
         {/* 6 Interest Cards Grid */}
         <div className="pt-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {/* Card 1: Sports */}
-            <div className="p-5 rounded-[14px] border border-border bg-surface card-hover group">
+            {/* Card 1: Sports (Hidden favorite sport line until filled) */}
+            <div className="p-5 rounded-[14px] border border-border bg-surface card-hover group flex flex-col justify-between">
               <div className="flex items-center gap-3">
                 <div className="p-2 rounded-md bg-surface-subtle text-foreground border border-border/50 group-hover:-translate-y-1 transition-transform">
                   <Trophy className="w-4 h-4 text-accent" aria-hidden="true" />
                 </div>
                 <h3 className="font-semibold text-sm text-foreground">Sports</h3>
               </div>
-              <p className="mt-3 text-xs font-mono text-muted">
-                Cricket, football & endurance athletics.
-              </p>
             </div>
 
-            {/* Card 2: Formula 1 */}
+            {/* Card 2: Formula 1 (Hidden favorite team line until filled) */}
             <div
               onMouseEnter={() => setF1LightsActive(true)}
               onMouseLeave={() => setF1LightsActive(false)}
-              className="p-5 rounded-[14px] border border-border bg-surface card-hover group"
+              className="p-5 rounded-[14px] border border-border bg-surface card-hover group flex flex-col justify-between"
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -124,9 +120,6 @@ export default function About({ hasPhoto = false }: { hasPhoto?: boolean }) {
                   ))}
                 </div>
               </div>
-              <p className="mt-3 text-xs font-mono text-muted">
-                Telemetry, strategy calls & race pace.
-              </p>
             </div>
 
             {/* Card 3: Coding */}
@@ -138,32 +131,21 @@ export default function About({ hasPhoto = false }: { hasPhoto?: boolean }) {
                 <h3 className="font-semibold text-sm text-foreground">Coding</h3>
               </div>
               <div className="mt-3 text-xs font-mono text-muted flex items-center gap-1">
-                <span>DSA drills & LeetCode problem solving</span>
+                <span>DSA drills & LeetCode</span>
                 <span className="w-1.5 h-3.5 bg-accent inline-block animate-pulse" aria-hidden="true" />
               </div>
             </div>
 
-            {/* Card 4: Optimising */}
-            <div
-              onMouseEnter={() => setOptimisingHover(true)}
-              onMouseLeave={() => setOptimisingHover(false)}
-              className="p-5 rounded-[14px] border border-border bg-surface card-hover group"
-            >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-md bg-surface-subtle text-foreground border border-border/50">
-                    <Zap className="w-4 h-4 text-accent" aria-hidden="true" />
-                  </div>
-                  <h3 className="font-semibold text-sm text-foreground">Optimising</h3>
+            {/* Card 4: Optimising (plain text: I like measuring things before and after.) */}
+            <div className="p-5 rounded-[14px] border border-border bg-surface card-hover group">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-md bg-surface-subtle text-foreground border border-border/50">
+                  <Zap className="w-4 h-4 text-accent" aria-hidden="true" />
                 </div>
-                <span className="text-[11px] font-mono text-accent font-semibold">
-                  {optimisingHover ? "79 ms" : "138 ms"}
-                </span>
+                <h3 className="font-semibold text-sm text-foreground">Optimising</h3>
               </div>
               <p className="mt-3 text-xs font-mono text-muted">
-                {optimisingHover
-                  ? "79 ms p95 achieved with composite index"
-                  : "138 ms → 79 ms on SpendWise report query"}
+                I like measuring things before and after.
               </p>
             </div>
 
@@ -193,7 +175,7 @@ export default function About({ hasPhoto = false }: { hasPhoto?: boolean }) {
                 </h3>
               </div>
               <p className="mt-3 text-xs font-mono text-muted">
-                Documenting performance benchmarks and honest trade-offs.
+                Documenting engineering benchmarks and honest trade-offs.
               </p>
             </div>
           </div>
