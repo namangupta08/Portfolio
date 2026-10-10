@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { allProjects, ProjectCategory } from "@/data/projects";
-import { FeaturedProjectCard, CompactProjectCard } from "@/app/components/ProjectCard";
+import { HalfFeaturedProjectCard, CompactProjectCard } from "@/app/components/ProjectCard";
 
 const filterCategories: ProjectCategory[] = ["All", "Backend", "Full-stack", "AI"];
 
@@ -17,7 +17,8 @@ export default function ProjectsPage() {
   });
 
   const featured = filtered.filter((p) => p.isFeatured);
-  const other = filtered.filter((p) => !p.isFeatured);
+  // Hide any project without summary data
+  const other = filtered.filter((p) => !p.isFeatured && p.summary && p.summary.trim().length > 0);
 
   return (
     <div className="py-12 sm:py-16 space-y-10">
@@ -58,7 +59,7 @@ export default function ProjectsPage() {
                   onClick={() => setSelectedCategory(cat)}
                   className={`px-3 py-1 rounded-[6px] font-mono text-xs uppercase tracking-[0.06em] transition-all btn-press ${
                     active
-                      ? "bg-accent text-white font-medium shadow-sm"
+                      ? "bg-accent text-white dark:text-[#0A0A0B] font-semibold shadow-sm"
                       : "text-muted hover:text-foreground"
                   }`}
                 >
@@ -73,9 +74,13 @@ export default function ProjectsPage() {
       {/* Featured Projects */}
       {featured.length > 0 && (
         <div className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {featured.map((p) => (
-              <FeaturedProjectCard key={p.slug} project={p} />
+              <HalfFeaturedProjectCard
+                key={p.slug}
+                project={p}
+                hasScreenshot={p.slug === "vistavoyage"}
+              />
             ))}
           </div>
         </div>
@@ -87,7 +92,7 @@ export default function ProjectsPage() {
           <h2 className="font-mono text-xs uppercase tracking-[0.08em] text-muted-dark">
             Additional repositories & platforms
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {other.map((p) => (
               <CompactProjectCard key={p.slug} project={p} />
             ))}

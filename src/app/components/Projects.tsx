@@ -2,7 +2,11 @@
 
 import React, { useState } from "react";
 import { featuredProjects, moreProjects, ProjectCategory } from "@/data/projects";
-import { FeaturedProjectCard, CompactProjectCard } from "./ProjectCard";
+import {
+  WideFeaturedProjectCard,
+  HalfFeaturedProjectCard,
+  CompactProjectCard,
+} from "./ProjectCard";
 
 const filterCategories: ProjectCategory[] = ["All", "Backend", "Full-stack", "AI"];
 
@@ -14,23 +18,34 @@ export default function Projects() {
     return p.category === selectedCategory;
   });
 
-  const filteredMore = moreProjects.filter((p) => {
+  // Hide any project without data (only show projects with a valid summary)
+  const validMoreProjects = moreProjects.filter(
+    (p) => p.summary && p.summary.trim().length > 0
+  );
+
+  const filteredMore = validMoreProjects.filter((p) => {
     if (selectedCategory === "All") return true;
     return p.category === selectedCategory;
   });
 
+  const firstWideProject = filteredFeatured[0];
+  const remainingFeatured = filteredFeatured.slice(1);
+
   return (
     <section id="projects" className="py-[72px] lg:py-[112px] border-t border-border">
-      <div className="space-y-8">
-        {/* Section Header with Filter Chips */}
-        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
-          <div>
+      <div className="space-y-10">
+        {/* Section Header with One-line Subtitle and Filter Chips */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div className="space-y-1">
             <span className="font-mono text-xs uppercase tracking-[0.08em] text-muted-dark block">
-              Projects
+              Portfolio
             </span>
-            <h2 className="text-[2.25rem] font-semibold tracking-[-0.02em] text-foreground leading-tight mt-1">
+            <h2 className="text-[2.25rem] font-semibold tracking-[-0.02em] text-foreground leading-tight">
               Selected work
             </h2>
+            <p className="text-sm text-muted">
+              Systems, developer tools, and full-stack applications with measured performance.
+            </p>
           </div>
 
           {/* Filter Chips */}
@@ -61,41 +76,35 @@ export default function Projects() {
           </div>
         </div>
 
-        {/* Featured Projects Bento Layout: 1 wide + 2 half-width */}
-        {filteredFeatured.length > 0 && (
-          <div className="space-y-4">
-            {/* If "All", show first card as wide full-width, next 2 as half-width */}
-            {selectedCategory === "All" ? (
-              <>
-                {/* Wide Card (DocFlow) */}
-                <div className="w-full">
-                  <FeaturedProjectCard project={filteredFeatured[0]} />
-                </div>
+        {/* Featured Bento Layout: First full-width, next two half-width */}
+        <div className="space-y-6">
+          {firstWideProject && (
+            <WideFeaturedProjectCard
+              project={firstWideProject}
+              hasScreenshot={firstWideProject.slug === "vistavoyage"}
+            />
+          )}
 
-                {/* 2 Half-width Cards (SpendWise & VistaVoyage) */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {filteredFeatured.slice(1).map((project) => (
-                    <FeaturedProjectCard key={project.slug} project={project} />
-                  ))}
-                </div>
-              </>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {filteredFeatured.map((project) => (
-                  <FeaturedProjectCard key={project.slug} project={project} />
-                ))}
-              </div>
-            )}
-          </div>
-        )}
+          {remainingFeatured.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {remainingFeatured.map((project) => (
+                <HalfFeaturedProjectCard
+                  key={project.slug}
+                  project={project}
+                  hasScreenshot={project.slug === "vistavoyage"}
+                />
+              ))}
+            </div>
+          )}
+        </div>
 
-        {/* More Work Section (2x2 grid) */}
+        {/* More Work (2-column compact grid, hiding any with missing data) */}
         {filteredMore.length > 0 && (
-          <div className="pt-8 space-y-4">
+          <div className="pt-6 space-y-4">
             <h3 className="font-mono text-xs uppercase tracking-[0.08em] text-muted-dark">
               More work
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {filteredMore.map((project) => (
                 <CompactProjectCard key={project.slug} project={project} />
               ))}
