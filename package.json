@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "activity": "node scripts/generate-activity.mjs"
   },
   "dependencies": {
     "@tabler/icons-react": "^3.17.0",

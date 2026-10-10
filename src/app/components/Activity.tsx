@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { GitHubContributionsResult } from "@/lib/github";
+import { ActivityData } from "@/lib/activity";
 
 interface ActivityProps {
-  data: GitHubContributionsResult;
+  data: ActivityData;
 }
 
 export default function Activity({ data }: ActivityProps) {
@@ -53,16 +53,24 @@ export default function Activity({ data }: ActivityProps) {
     }
   };
 
-  // Compute month labels at first occurrence of new month
+  // Compute month labels with guaranteed spacing to prevent Dec/Jan overlaps
   const monthLabels: { index: number; label: string }[] = [];
   let lastMonth = "";
+  let lastMonthIndex = -10;
+
   data.weeks.forEach((week, wIdx) => {
     if (week.days.length > 0) {
       const d = new Date(week.days[0].date);
       const m = d.toLocaleDateString("en-US", { month: "short" });
-      if (m !== lastMonth && wIdx < data.weeks.length - 2) {
+      // Require at least 4 weeks gap between month labels to prevent collision
+      if (
+        m !== lastMonth &&
+        wIdx - lastMonthIndex >= 4 &&
+        wIdx < data.weeks.length - 2
+      ) {
         monthLabels.push({ index: wIdx, label: m });
         lastMonth = m;
+        lastMonthIndex = wIdx;
       }
     }
   });
@@ -71,22 +79,51 @@ export default function Activity({ data }: ActivityProps) {
     <section id="activity" className="py-[72px] lg:py-[112px] border-t border-border">
       <div className="space-y-6">
         {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3">
           <div>
             <h2 className="text-[2.25rem] font-semibold tracking-[-0.02em] text-foreground leading-tight">
-              Activity
+              Coding activity
             </h2>
-            <p className="text-xs font-mono text-muted uppercase tracking-[0.08em] mt-1">
-              {data.totalContributions.toLocaleString()} contributions in the last year
-            </p>
+            {data.isReal ? (
+              <p className="text-xs font-mono text-muted uppercase tracking-[0.08em] mt-1">
+                {data.totalContributions.toLocaleString()} contributions and submissions in the last year
+              </p>
+            ) : (
+              <p className="text-xs font-mono text-muted uppercase tracking-[0.08em] mt-1">
+                Illustrative pattern, not real activity
+              </p>
+            )}
           </div>
 
-          {data.isStaticSnapshot && (
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-border bg-surface text-[11px] font-mono text-muted-dark w-fit">
-              <span className="w-1.5 h-1.5 rounded-full bg-muted-dark" aria-hidden="true" />
-              <span>Static snapshot</span>
-            </div>
-          )}
+          {/* Sources and Update status */}
+          <div className="flex flex-wrap items-center gap-2">
+            {data.isReal ? (
+              <>
+                <div className="flex items-center gap-1.5 text-[11px] font-mono text-muted-dark">
+                  {data.sources.github && (
+                    <span className="px-2 py-0.5 rounded-full border border-border bg-surface">
+                      GitHub: {data.gitHubTotal}
+                    </span>
+                  )}
+                  {data.sources.leetcode && (
+                    <span className="px-2 py-0.5 rounded-full border border-border bg-surface">
+                      LeetCode: {data.leetCodeTotal}
+                    </span>
+                  )}
+                </div>
+                {data.generatedAt && (
+                  <span className="text-[11px] font-mono text-muted-dark">
+                    Updated {data.generatedAt}
+                  </span>
+                )}
+              </>
+            ) : (
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-border bg-surface text-[11px] font-mono text-muted-dark w-fit">
+                <span className="w-1.5 h-1.5 rounded-full bg-muted-dark" aria-hidden="true" />
+                <span>Pattern fallback</span>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Contribution Grid Card */}
@@ -96,17 +133,20 @@ export default function Activity({ data }: ActivityProps) {
             ref={scrollContainerRef}
             tabIndex={0}
             role="region"
-            aria-label="GitHub contribution calendar"
+            aria-label="Coding activity contribution calendar"
             className="w-full overflow-x-auto pb-3 pt-1 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent"
           >
             <div className="inline-flex flex-col min-w-max">
               {/* Month Labels */}
-              <div className="flex text-[10px] font-mono text-muted-dark mb-2 ml-8 h-4 relative" aria-hidden="true">
+              <div
+                className="flex text-[10px] font-mono text-muted-dark mb-2 ml-8 h-4 relative"
+                aria-hidden="true"
+              >
                 {monthLabels.map((m, idx) => (
                   <span
                     key={idx}
                     style={{ left: `${m.index * 14}px` }}
-                    className="absolute"
+                    className="absolute whitespace-nowrap"
                   >
                     {m.label}
                   </span>
@@ -116,7 +156,10 @@ export default function Activity({ data }: ActivityProps) {
               {/* Day labels + Grid */}
               <div className="flex items-start gap-2">
                 {/* Day Labels (Mon, Wed, Fri) */}
-                <div className="flex flex-col gap-[3px] text-[9px] font-mono text-muted-dark pt-[2px] w-6 select-none" aria-hidden="true">
+                <div
+                  className="flex flex-col gap-[3px] text-[9px] font-mono text-muted-dark pt-[2px] w-6 select-none"
+                  aria-hidden="true"
+                >
                   <span className="h-[11px] leading-[11px]"></span>
                   <span className="h-[11px] leading-[11px]">Mon</span>
                   <span className="h-[11px] leading-[11px]"></span>
@@ -141,9 +184,12 @@ export default function Activity({ data }: ActivityProps) {
                         <div
                           key={`${wIdx}-${dIdx}`}
                           onMouseEnter={(e) => {
+                            if (!data.isReal) return;
                             const rect = e.currentTarget.getBoundingClientRect();
                             setTooltip({
-                              text: `${day.count} contribution${day.count === 1 ? "" : "s"} on ${formatDate(day.date)}`,
+                              text: `${day.count} activity item${
+                                day.count === 1 ? "" : "s"
+                              } on ${formatDate(day.date)}`,
                               x: rect.left + rect.width / 2,
                               y: rect.top - 8,
                             });
@@ -152,7 +198,13 @@ export default function Activity({ data }: ActivityProps) {
                           className={`w-[11px] h-[11px] rounded-[2.5px] transition-colors cursor-pointer hover:ring-1 hover:ring-accent ${getLevelClass(
                             day.level
                           )}`}
-                          title={`${day.count} contribution${day.count === 1 ? "" : "s"} on ${formatDate(day.date)}`}
+                          title={
+                            data.isReal
+                              ? `${day.count} item${
+                                  day.count === 1 ? "" : "s"
+                                } on ${formatDate(day.date)}`
+                              : ""
+                          }
                         />
                       ))}
                     </div>
@@ -162,41 +214,40 @@ export default function Activity({ data }: ActivityProps) {
             </div>
           </div>
 
-          {/* Floating Tooltip */}
-          {tooltip && (
-            <div
-              style={{
-                position: "fixed",
-                left: `${tooltip.x}px`,
-                top: `${tooltip.y}px`,
-                transform: "translate(-50%, -100%)",
-              }}
-              className="pointer-events-none z-50 px-2.5 py-1 text-[11px] font-mono rounded-md bg-foreground text-background shadow-lg whitespace-nowrap"
-            >
-              {tooltip.text}
-            </div>
-          )}
+          {/* Bottom Row: Legend */}
+          <div className="flex items-center justify-between text-xs font-mono text-muted-dark pt-4 mt-2 border-t border-border/60">
+            <span className="text-[11px]">
+              {data.isReal ? "GitHub + LeetCode activity" : "Pattern preview"}
+            </span>
 
-          {/* Legend row */}
-          <div className="flex flex-wrap items-center justify-between pt-4 mt-2 border-t border-border text-xs text-muted">
-            <div className="font-mono text-[11px] text-muted">
-              namangupta08 on GitHub
-            </div>
-
-            <div className="flex items-center gap-2 font-mono text-[11px] text-muted-dark">
-              <span>Less</span>
-              <div className="flex items-center gap-[3px]" aria-hidden="true">
-                <span className="w-2.5 h-2.5 rounded-[2px] bg-surface-subtle border border-border/70 dark:border-white/[0.06]" />
-                <span className="w-2.5 h-2.5 rounded-[2px] bg-zinc-300 dark:bg-zinc-700/80" />
-                <span className="w-2.5 h-2.5 rounded-[2px] bg-zinc-400 dark:bg-zinc-600" />
-                <span className="w-2.5 h-2.5 rounded-[2px] bg-accent/60" />
-                <span className="w-2.5 h-2.5 rounded-[2px] bg-accent" />
+            {/* 5 Levels Legend */}
+            <div className="flex items-center gap-1.5" aria-hidden="true">
+              <span className="text-[10px]">Less</span>
+              <div className="flex items-center gap-1">
+                {[0, 1, 2, 3, 4].map((lvl) => (
+                  <div
+                    key={lvl}
+                    className={`w-[11px] h-[11px] rounded-[2.5px] ${getLevelClass(
+                      lvl
+                    )}`}
+                  />
+                ))}
               </div>
-              <span>More</span>
+              <span className="text-[10px]">More</span>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Floating Hover Tooltip */}
+      {tooltip && (
+        <div
+          className="fixed z-50 pointer-events-none transform -translate-x-1/2 -translate-y-full px-2.5 py-1 rounded bg-zinc-900 text-zinc-100 text-[11px] font-mono shadow-md border border-zinc-700/80 whitespace-nowrap"
+          style={{ left: tooltip.x, top: tooltip.y }}
+        >
+          {tooltip.text}
+        </div>
+      )}
     </section>
   );
 }

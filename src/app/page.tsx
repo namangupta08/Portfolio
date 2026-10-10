@@ -7,19 +7,17 @@ import Projects from "./components/Projects";
 import TechStack from "./components/TechStack";
 import Writing from "./components/Writing";
 import Contact from "./components/Contact";
-import { getGitHubContributions } from "@/lib/github";
+import { getActivityData } from "@/lib/activity";
 import { getAllPosts } from "@/lib/blog";
 
 import fs from "fs";
 import path from "path";
 
-export const revalidate = 43200; // 12 hours cache for GitHub contributions & static pages
+export const revalidate = 43200; // 12 hours cache for static pages
 
 export default async function HomePage() {
-  const [gitHubData, posts] = await Promise.all([
-    getGitHubContributions("namangupta08"),
-    getAllPosts(true), // Include posts for review
-  ]);
+  const activityData = getActivityData();
+  const posts = await getAllPosts(true); // Include posts for review
 
   const publicDir = path.join(process.cwd(), "public");
   const hasAboutPhoto = fs.existsSync(path.join(publicDir, "about/me.jpg"));
@@ -33,8 +31,8 @@ export default async function HomePage() {
       {/* 1. HERO */}
       <Hero />
 
-      {/* 2. ACTIVITY (GitHub grid) */}
-      <Activity data={gitHubData} />
+      {/* 2. ACTIVITY (Coding activity grid) */}
+      <Activity data={activityData} />
 
       {/* 3. ABOUT */}
       <About hasPhoto={hasAboutPhoto} />
