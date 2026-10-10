@@ -20,7 +20,6 @@ export default async function HomePage() {
   const posts = await getAllPosts(true); // Include posts for review
 
   const publicDir = path.join(process.cwd(), "public");
-  const hasAboutPhoto = fs.existsSync(path.join(publicDir, "about/me.jpg"));
   const existingLogos = {
     epigee: fs.existsSync(path.join(publicDir, "logos/epigee.png")),
     zevise: fs.existsSync(path.join(publicDir, "logos/zevise.png")),
@@ -35,7 +34,7 @@ export default async function HomePage() {
       <Activity data={activityData} />
 
       {/* 3. ABOUT */}
-      <About hasPhoto={hasAboutPhoto} />
+      <About />
 
       {/* 4. EXPERIENCE */}
       <Experience existingLogos={existingLogos} />

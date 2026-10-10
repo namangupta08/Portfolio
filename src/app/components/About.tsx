@@ -10,66 +10,29 @@ import {
   Code2,
 } from "lucide-react";
 
-export default function About({ hasPhoto = false }: { hasPhoto?: boolean }) {
-  const [photoError, setPhotoError] = useState(!hasPhoto);
+export default function About() {
   const [f1LightsActive, setF1LightsActive] = useState(false);
 
   return (
     <section id="about" className="py-[72px] lg:py-[112px] border-t border-border">
       <div className="space-y-12">
-        {/* Two-column layout on desktop, stacked on mobile */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          {/* Left Column: Text */}
-          <div className="lg:col-span-7 space-y-6">
-            <span className="font-mono text-xs uppercase tracking-[0.08em] text-muted-dark block">
-              About
-            </span>
+        {/* About Bio Content */}
+        <div className="space-y-6 max-w-3xl">
+          <span className="font-mono text-xs uppercase tracking-[0.08em] text-muted-dark block">
+            About
+          </span>
 
-            <h2 className="text-[2.25rem] font-semibold tracking-[-0.02em] text-foreground leading-[1.15]">
-              Software Developer
-            </h2>
+          <h2 className="text-[2.25rem] font-semibold tracking-[-0.02em] text-foreground leading-[1.15]">
+            Software Developer
+          </h2>
 
-            <div className="space-y-3 text-sm sm:text-base leading-relaxed text-muted max-w-prose">
-              <p>
-                Software developer from Delhi with a B.Tech in Information Technology from GGSIPU (9.2 CGPA).
-              </p>
-              <p>
-                I build fast, resilient web applications using React, Node.js, Django, and PostgreSQL, integrating LLM features to eliminate real workflow bottlenecks.
-              </p>
-            </div>
-          </div>
-
-          {/* Right Column: Photo with slight rotation */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end">
-            <div className="relative group">
-              <div className="w-64 h-80 sm:w-72 sm:h-88 rounded-[14px] border border-border bg-surface overflow-hidden shadow-sm -rotate-2 group-hover:rotate-0 transition-transform duration-300 ease-out flex items-center justify-center p-2">
-                {!photoError ? (
-                  <div className="relative w-full h-full rounded-[10px] overflow-hidden bg-surface-subtle">
-                    {/* Native img with graceful onError fallback to monogram */}
-                    <img
-                      src="/about/me.jpg"
-                      alt="Naman Gupta"
-                      className="w-full h-full object-cover"
-                      onError={() => setPhotoError(true)}
-                    />
-                  </div>
-                ) : (
-                  <div className="w-full h-full rounded-[10px] bg-surface-subtle border border-border flex flex-col items-center justify-center text-center p-6 space-y-3">
-                    <div className="w-16 h-16 rounded-full border border-border bg-surface flex items-center justify-center font-mono text-xl font-semibold text-foreground">
-                      NG
-                    </div>
-                    <div className="space-y-1">
-                      <span className="font-medium text-sm text-foreground block">
-                        Naman Gupta
-                      </span>
-                      <span className="font-mono text-xs text-muted-dark block">
-                        Delhi, India
-                      </span>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
+          <div className="space-y-3 text-sm sm:text-base leading-relaxed text-muted">
+            <p>
+              Software developer from Delhi with a B.Tech in Information Technology from GGSIPU (9.2 CGPA).
+            </p>
+            <p>
+              I build fast, resilient web applications using React, Node.js, Django, and PostgreSQL, integrating LLM features to eliminate real workflow bottlenecks.
+            </p>
           </div>
         </div>
 
