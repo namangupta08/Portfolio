@@ -23,7 +23,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="w-full border-t border-border mt-20 py-12 text-sm text-muted bg-surface/30">
+    <footer className="w-full border-t border-border mt-20 pt-12 pb-24 text-sm text-muted bg-surface/30">
       <div className="max-w-[1100px] mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-6">
         {/* Left: Icon + Label Links */}
         <div className="flex flex-wrap items-center justify-center sm:justify-start gap-5 font-mono text-xs">

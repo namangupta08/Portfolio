@@ -79,7 +79,7 @@ export default function ProjectsPage() {
               <HalfFeaturedProjectCard
                 key={p.slug}
                 project={p}
-                hasScreenshot={p.slug === "vistavoyage"}
+                hasScreenshot={Boolean(p.screenshot)}
               />
             ))}
           </div>

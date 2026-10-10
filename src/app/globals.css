@@ -160,7 +160,7 @@ body {
   }
 }
 
-/* Cursor following spotlight in accent at ~6% opacity */
+/* Cursor following spotlight in accent orange glow */
 .cursor-spotlight {
   pointer-events: none;
   position: fixed;
@@ -168,10 +168,11 @@ body {
   z-index: 1;
   background: radial-gradient(
     600px circle at var(--mouse-x, -1000px) var(--mouse-y, -1000px),
-    rgba(var(--accent-rgb), 0.06),
-    transparent 65%
+    rgba(var(--accent-rgb), 0.15) 0%,
+    rgba(var(--accent-rgb), 0.05) 45%,
+    transparent 70%
   );
-  transition: opacity 300ms ease;
+  transition: opacity 250ms ease;
 }
 
 @media (hover: none) or (pointer: coarse) {

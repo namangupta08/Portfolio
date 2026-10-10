@@ -81,7 +81,7 @@ export default function Projects() {
           {firstWideProject && (
             <WideFeaturedProjectCard
               project={firstWideProject}
-              hasScreenshot={firstWideProject.slug === "vistavoyage"}
+              hasScreenshot={Boolean(firstWideProject.screenshot)}
             />
           )}
 
@@ -91,7 +91,7 @@ export default function Projects() {
                 <HalfFeaturedProjectCard
                   key={project.slug}
                   project={project}
-                  hasScreenshot={project.slug === "vistavoyage"}
+                  hasScreenshot={Boolean(project.screenshot)}
                 />
               ))}
             </div>

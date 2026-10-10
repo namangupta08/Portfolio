@@ -9,7 +9,7 @@ This document tracks all external assets, configuration tokens, project details,
 | Asset | Expected Path | Current Fallback in Code | Action Needed |
 | :--- | :--- | :--- | :--- |
 | **Resume PDF** | `/public/Naman-Gupta-Resume.pdf` | Clean "Resume coming soon" card with direct Email CTA button | Place your final resume PDF at this path. The viewer and download buttons will immediately activate automatically. |
-| **Profile Photo** | `/public/about/me.jpg` | Monogram frame (`NG`) with hover straighten | Place your headshot photo at `/public/about/me.jpg`. |
+| **Profile Photo** | `/public/about/me.jpg` | *Present* (Caricature avatar placed at `/public/about/me.jpg`) | Replace with real headshot photograph whenever desired. |
 | **Epigee Inc. Logo** | `/public/logos/epigee.png` | Lucide `Building2` on soft tinted rounded square | Place company logo (PNG or SVG) at `/public/logos/epigee.png`. |
 | **Zevise Logo** | `/public/logos/zevise.png` | Lucide `Building2` on soft tinted rounded square | Place company logo (PNG or SVG) at `/public/logos/zevise.png`. |
 | **DocFlow Screenshot** | `/public/projects/docflow.png` | Minimal browser frame with project category, title & tech chips | Save product screenshot at `/public/projects/docflow.png`. |
@@ -18,29 +18,22 @@ This document tracks all external assets, configuration tokens, project details,
 
 ---
 
-## 2. Project Details & Links (`src/data/projects.ts`)
+## 2. Project Repository & Demo Links (`src/data/projects.ts`)
 
-Per instructions, projects with missing summaries or links are hidden or have buttons omitted to prevent empty shells:
+Project descriptions and full tech stacks are now populated. Provide live or repo links if you want external buttons displayed:
 
-1. **DocFlow**:
-   - `githubUrl`: Provide your repository link when ready to enable the "GitHub" button.
-2. **Zevise**:
-   - `link`: Provide your live demo or repository link.
-3. **SwiftCabs**:
-   - Summary, tech stack, and links (`summary`, `stack`, `liveUrl`, `githubUrl`). (Currently hidden from More Work).
-4. **StudyNothing**:
-   - Summary, tech stack, and links (`summary`, `stack`, `liveUrl`, `githubUrl`). (Currently hidden from More Work).
-5. **ChatApp**:
-   - Summary, tech stack, and links (`summary`, `stack`, `liveUrl`, `githubUrl`). (Currently hidden from More Work).
+1. **DocFlow**: `githubUrl`: Provide your repository link when ready.
+2. **Swift Cab**: `liveUrl` / `githubUrl`: Provide repository or demo link when ready.
+3. **Study Notion**: `liveUrl` / `githubUrl`: Provide repository or demo link when ready.
+4. **ChatX**: `liveUrl` / `githubUrl`: Provide repository or demo link when ready.
+5. **Zevise**: `liveUrl` / `githubUrl`: Provide repository or demo link when ready.
 
 ---
 
 ## 3. About Section Interests (`src/data/` or `About.tsx`)
 
-1. **Sports**:
-   - Favorite sport (`[FILL IN favorite sport]`). The line is currently hidden beneath the "Sports" card until provided.
-2. **Formula 1**:
-   - Favorite team (`[FILL IN favorite team]`). The line is currently hidden beneath the "Formula 1" card until provided.
+1. **Sports**: *Filled* (Cricket, football & badminton).
+2. **Formula 1**: Favorite team (`[FILL IN favorite team]`). The line is currently hidden beneath the "Formula 1" card until provided.
 
 ---
 

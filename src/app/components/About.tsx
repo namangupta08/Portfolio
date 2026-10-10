@@ -79,7 +79,7 @@ export default function About({ hasPhoto = false }: { hasPhoto?: boolean }) {
         {/* 6 Interest Cards Grid */}
         <div className="pt-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {/* Card 1: Sports (Hidden favorite sport line until filled) */}
+            {/* Card 1: Sports */}
             <div className="p-5 rounded-[14px] border border-border bg-surface card-hover group flex flex-col justify-between">
               <div className="flex items-center gap-3">
                 <div className="p-2 rounded-md bg-surface-subtle text-foreground border border-border/50 group-hover:-translate-y-1 transition-transform">
@@ -87,6 +87,9 @@ export default function About({ hasPhoto = false }: { hasPhoto?: boolean }) {
                 </div>
                 <h3 className="font-semibold text-sm text-foreground">Sports</h3>
               </div>
+              <p className="mt-3 text-xs font-mono text-muted">
+                Cricket, football & badminton.
+              </p>
             </div>
 
             {/* Card 2: Formula 1 (Hidden favorite team line until filled) */}

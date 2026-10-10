@@ -70,6 +70,12 @@ export const experiencesData: ExperienceRole[] = [
         description:
           "Answers from company policy and customer data using chunking, Qdrant embeddings and source citations.",
       },
+      {
+        title: "Workflow & analyst UI",
+        icon: "Layout",
+        description:
+          "Built responsive analyst dashboards and interactive reconciliation queues in React with split-payment handling and real-time audit logs.",
+      },
     ],
   },
   {

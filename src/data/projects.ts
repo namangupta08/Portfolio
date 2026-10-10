@@ -64,7 +64,6 @@ export const featuredProjects: Project[] = [
     summary:
       "Personal finance tracker with budget alerts and a month-end report in SQL.",
     stack: ["React", "TypeScript", "Node.js", "Express", "PostgreSQL"],
-    metricBadge: "p95 31 ms on 10,000 transactions",
     isFeatured: true,
     bentoSpan: "half",
     screenshot: "/projects/spendwise.png",
@@ -88,8 +87,8 @@ export const featuredProjects: Project[] = [
     name: "VistaVoyage",
     category: "AI",
     summary:
-      "AI trip planner with a 6-step wizard, validated output, model failover and per-day regeneration.",
-    stack: ["React.js", "Tailwind CSS", "Firebase", "Gemini API"],
+      "AI travel planner producing structured 9-section editorial dossiers with landmarks, timing logistics, interactive maps, transit directions, and exportable PDF schedules.",
+    stack: ["React", "Vite", "Tailwind CSS", "Gemini API", "Firebase"],
     isFeatured: true,
     bentoSpan: "half",
     screenshot: "/projects/vistavoyage.png",
@@ -116,37 +115,59 @@ export const moreProjects: Project[] = [
     name: "Zevise",
     category: "Full-stack",
     summary:
-      "Short-form EdTech platform: bite-sized lessons, topic-wise content and progress tracking.",
-    stack: ["React.js", "JWT", "PostgreSQL"],
+      "Short-form EdTech platform: bite-sized lessons, topic-wise content and adaptive lesson delivery.",
+    stack: ["React.js", "JWT", "Node.js"],
     isFeatured: false,
-    linksPlaceholder: true, // Link: [FILL IN]
   },
   {
     slug: "swiftcabs",
-    name: "SwiftCabs",
+    name: "Swift Cab",
     category: "Full-stack",
-    summary: "",
-    stack: [],
+    summary:
+      "Full-stack MERN ride-hailing application with Leaflet interactive tracking, OpenStreetMap routing, and Socket.IO real-time ride matching.",
+    stack: [
+      "React.js",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Socket.IO",
+      "Leaflet.js",
+      "JWT",
+    ],
     isFeatured: false,
-    linksPlaceholder: true, // [FILL IN summary, stack, links]
   },
   {
-    slug: "studynothing",
-    name: "StudyNothing",
+    slug: "studynotion",
+    name: "Study Notion",
     category: "Full-stack",
-    summary: "",
-    stack: [],
+    summary:
+      "Interactive EdTech platform bridging students and instructors with course management, rich media lessons, and Razorpay transactions.",
+    stack: [
+      "React.js",
+      "Tailwind CSS",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Razorpay",
+    ],
     isFeatured: false,
-    linksPlaceholder: true, // [FILL IN summary, stack, links]
   },
   {
-    slug: "chatapp",
-    name: "ChatApp",
-    category: "Backend",
-    summary: "",
-    stack: [],
+    slug: "chatx",
+    name: "ChatX",
+    category: "Full-stack",
+    summary:
+      "Real-time MERN chat application featuring bi-directional WebSocket messaging via Socket.IO, group channels, multimedia sharing, and JWT auth.",
+    stack: [
+      "React.js",
+      "Tailwind CSS",
+      "Node.js",
+      "Express.js",
+      "Socket.IO",
+      "MongoDB",
+      "JWT",
+    ],
     isFeatured: false,
-    linksPlaceholder: true, // [FILL IN summary, stack, links]
   },
 ];
 

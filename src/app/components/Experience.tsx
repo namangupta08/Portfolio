@@ -14,6 +14,7 @@ import {
   Smartphone,
   KeyRound,
   Database,
+  Layout,
 } from "lucide-react";
 import { experiencesData, ExperienceRole, ExperienceHighlight } from "@/data/experience";
 
@@ -35,6 +36,8 @@ function getHighlightIcon(iconName: string) {
       return <KeyRound className="w-4 h-4 text-accent flex-shrink-0" aria-hidden="true" />;
     case "Database":
       return <Database className="w-4 h-4 text-accent flex-shrink-0" aria-hidden="true" />;
+    case "Layout":
+      return <Layout className="w-4 h-4 text-accent flex-shrink-0" aria-hidden="true" />;
     default:
       return <Layers className="w-4 h-4 text-accent flex-shrink-0" aria-hidden="true" />;
   }
@@ -191,10 +194,10 @@ export default function Experience({
 }: {
   existingLogos?: Record<string, boolean>;
 }) {
-  // Newest role open by default, others closed
+  // By default all roles are open
   const [expandedIds, setExpandedIds] = useState<Record<string, boolean>>({
     epigee: true,
-    zevise: false,
+    zevise: true,
   });
 
   const toggleRole = (id: string) => {
